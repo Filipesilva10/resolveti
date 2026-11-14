@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ResolveTI · Etapa inicial</title>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer>
+</script>
+</head>
+<body>
+<div id="aviso" role="status" aria-live="polite" hidden>
+</div>
+<main id="login" class="login-layout">
+<section class="apresentacao">
+<a class="marca" href="/">r<span>ResolveTI</span>
+</a>
+<div>
+<span class="etiqueta">CENTRAL DE SUPORTE</span>
+<h1>Seu suporte,<br>
+<em>mais organizado.</em>
+</h1>
+<p>Abra sua solicitação e acompanhe o atendimento.</p>
+</div>
+<small>Projeto acadêmico · Etapa inicial</small>
+</section>
+<section class="acesso">
+<div class="login-card">
+<span class="etiqueta">BEM-VINDO</span>
+<h2>Acesse sua conta</h2>
+<form id="form-login">
+<label>E-mail<input type="email" name="email" autocomplete="username" required value="solicitante@resolveti.local">
+</label>
+<label>Senha<input type="password" name="senha" autocomplete="current-password" required>
+</label>
+<button class="primario">Entrar →</button>
+</form>
+<div class="demo">
+<strong>Conta de demonstração</strong>
+<p>Senha: Demo@123</p>
+</div>
+</div>
+</section>
+</main>
+<div id="sistema" hidden>
+<header>
+<strong>ResolveTI</strong>
+<div class="conta">
+<span id="usuario">
+</span>
+<button id="sair">Sair</button>
+</div>
+</header>
+<main class="conteudo">
+<div class="titulo-pagina">
+<div>
+<span class="etiqueta">CENTRAL DE SUPORTE</span>
+<h1>Meus chamados</h1>
+<p>Registre um problema para a equipe de TI.</p>
+</div>
+<button id="atualizar">↻ Atualizar</button>
+</div>
+<div class="detalhe-grid">
+<form id="form-chamado" class="painel formulario">
+<h2>Abrir chamado</h2>
+<label>Título<input name="titulo" minlength="5" maxlength="100" required placeholder="Ex.: Falha na impressora">
+</label>
+<div class="duas-colunas">
+<label>Categoria<select name="categoria">
+<option>Computador</option>
+<option>Internet</option>
+<option>Impressora</option>
+<option>Sistema</option>
+<option>Outro</option>
+</select>
+</label>
+<label>Prioridade<select name="prioridade">
+<option>Baixa</option>
+<option selected>Média</option>
+<option>Alta</option>
+</select>
+</label>
+</div>
+<label>Descrição<textarea name="descricao" rows="5" minlength="10" maxlength="2000" required>
+</textarea>
+</label>
+<button class="primario">Enviar chamado →</button>
+</form>
+<section class="painel bloco">
+<h2>Solicitações registradas</h2>
+<div id="lista">
+</div>
+</section>
+</div>
+</main>
+</div>
+</body>
+</html>

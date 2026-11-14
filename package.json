@@ -1,0 +1,9 @@
+{
+  "name": "resolveti",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.14.0" },
+  "scripts": { "start": "node src/server.js", "test": "node --test test/abertura.test.js" },
+  "dependencies": { "express": "5.2.1" }
+}
