@@ -8,9 +8,11 @@ Trabalho Prático de Documentação e Implementação Inicial de um Projeto de S
 
 <b>Disciplina</b><br/>Análise e Projeto de Sistemas
 
-<b>Integrantes</b><br/>Filipe Silva Rodrigues<br/>Segundo integrante a identificar para a entrega em dupla
+<b>Integrantes</b><br/>Filipe Silva Rodrigues<br/>Theo
 
 <b>Repositório público</b><br/><link href="https://github.com/Filipesilva10/resolveti" color="#156d59"><u>https://github.com/Filipesilva10/resolveti</u></link>
+
+<b>Demonstração no navegador</b><br/><link href="https://resolveti-unifran.onrender.com" color="#156d59"><u>https://resolveti-unifran.onrender.com</u></link>
 
 Franca, SP · 15 de novembro de 2026
 
@@ -175,6 +177,10 @@ Mensagem valida conteúdo; ID, autor e chamado são persistidos pela rota. Os re
 
 O repositório contém a implementação, os testes, os diagramas e os arquivos de entrega. O README explica como executar o projeto. O histórico registra a abertura inicial de chamados, a integração do atendimento, a correção móvel e a preparação da demonstração.
 
+<b>Testar no navegador</b><br/><link href="https://resolveti-unifran.onrender.com" color="#156d59"><u>https://resolveti-unifran.onrender.com</u></link>
+
+Selecione Solicitante ou Técnico na tela de login para preencher a conta de teste. Caso o serviço esteja em repouso, aguarde o carregamento inicial. Os chamados de demonstração são compartilhados por quem usa as contas fictícias e podem sumir quando o serviço reiniciar. Use somente dados fictícios.
+
 <b>Roteiro de avaliação</b><br/>Entre como solicitante e abra um chamado. Troque para o técnico, filtre pelo título e inicie o atendimento. Envie uma mensagem e conclua com uma solução. Retorne ao solicitante e confira a situação e a solução nos detalhes.
 
 <b>Entregáveis previstos no enunciado</b><br/>PDF consolidado, vídeo MP4 de até um minuto e link do repositório público. A submissão é pela BB até 18/11/2026 às 21h. Em dupla, o enunciado exige commits dos dois integrantes.
@@ -247,6 +253,8 @@ As senhas usam scrypt com sal. O cookie tem HttpOnly e SameSite=Strict e recebe 
 <b>Automação:</b> 19 testes aprovados. As requisições passam pelo Express com transporte em memória e bancos temporários; não usam servidor HTTP real. Cobrem criação, validação, privacidade entre solicitantes, atribuição, mensagens, conclusão, persistência e filtros.
 
 <b>Navegador:</b> em 15/11/2026 foram executados login, abertura, busca combinada com prioridade, início, mensagem, solução e consulta pelo solicitante. Após concluir, o formulário de mensagens ficou oculto. Houve correção do transbordamento móvel causado pelo elemento acessível do cabeçalho da tabela; após correção, viewport e largura da página mediram 390px e campos ficaram dentro da tela.
+
+<b>Demonstração pública</b><br/>O fluxo foi conferido via HTTPS em uma sessão nova. O solicitante abriu um chamado fictício, o técnico registrou uma mensagem e a solução, e o solicitante confirmou o resultado. O encerramento da sessão também foi conferido.
 
 | Requisitos | Caso de uso | Evidência |
 | --- | --- | --- |

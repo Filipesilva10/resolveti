@@ -2,6 +2,8 @@
 
 Repositório oficial: https://github.com/Filipesilva10/resolveti
 
+Veja o [plano do Theo](PLANO-THEO.md) e o [modelo de validação](modelos/VALIDACAO-THEO.md) para os arquivos e commits da entrega.
+
 ## Filipe: compartilhar
 
 Envie o link acima e este guia ao colega. No GitHub, abra Settings > Collaborators > Add people, informe o usuário dele e envie o convite. Ele precisa aceitar antes de enviar branches. Sem convite, ele pode fazer um fork e abrir um pull request a partir dele. Nunca compartilhe senha ou token.

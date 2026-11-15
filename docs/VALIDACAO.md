@@ -18,6 +18,7 @@ Data: 15/11/2026. Ambiente: Windows, Node.js 24.14, Chromium, SQLite local. Exec
 | Mensagens após conclusão | Formulário oculto; bloqueio da API coberto pelos testes. |
 | Voltar ao perfil solicitante | Solução e status final visíveis ao autor. |
 | Gravação da demonstração | O fluxo foi executado com cliques e digitação reais no Chromium. O cursor e as legendas foram adicionados à captura para acompanhar as ações. |
+| Demonstração pública | Em sessão nova no [site publicado](https://resolveti-unifran.onrender.com), foram conferidos login, abertura, filtro, atendimento, mensagem, conclusão, consulta da solução pelo solicitante e encerramento de sessão. |
 | Listagem em viewport móvel de 390px | Identificado transbordamento de elemento acessível no cabeçalho da tabela; corrigido com posicionamento relativo no th. |
 
 ## Roteiro para a validação independente da dupla
@@ -35,4 +36,4 @@ Registre o resultado real, não copie automaticamente a coluna acima.
 9. Reinicie o servidor e verifique persistência (o login precisa ser refeito).
 10. Em larguras de 390px e 1366px, preencha formulários; a tabela pode rolar horizontalmente, a página não deve ficar alargada.
 
-Registre nome, data, navegador, versão do Node, resultados e evidências em arquivo próprio. Testes de carga, publicação pública e auditoria de segurança não fazem parte da validação realizada.
+Registre nome, data, navegador, versão do Node, resultados e evidências em arquivo próprio. Testes de carga e auditoria de segurança ficam fora desta validação.

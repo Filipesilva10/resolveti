@@ -13,10 +13,10 @@ from reportlab.graphics import renderSVG
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'entrega'
 OUT.mkdir(exist_ok=True)
-SITE = os.environ.get('RESOLVETI_SITE_URL', '').strip()
+SITE = os.environ.get('RESOLVETI_SITE_URL', 'https://resolveti-unifran.onrender.com').strip()
 REPO = 'https://github.com/Filipesilva10/resolveti'
 ENUNCIADO = 'https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9'
-COLEGA = escape(os.environ.get('RESOLVETI_INTEGRANTE_2', '').strip())
+COLEGA = escape(os.environ.get('RESOLVETI_INTEGRANTE_2', 'Theo').strip())
 CAPTURA = ROOT / 'docs' / 'imagens' / 'chamado-concluido.png'
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(name='BodyPT', fontName='Helvetica', fontSize=10.5, leading=15, spaceAfter=10, textColor=colors.HexColor('#263d35')))
@@ -174,6 +174,8 @@ p('As senhas usam scrypt com sal. O cookie tem HttpOnly e SameSite=Strict e rece
 page('Apêndice C. Validação e evidências')
 p('<b>Automação:</b> 19 testes aprovados. As requisições passam pelo Express com transporte em memória e bancos temporários; não usam servidor HTTP real. Cobrem criação, validação, privacidade entre solicitantes, atribuição, mensagens, conclusão, persistência e filtros.')
 p('<b>Navegador:</b> em 15/11/2026 foram executados login, abertura, busca combinada com prioridade, início, mensagem, solução e consulta pelo solicitante. Após concluir, o formulário de mensagens ficou oculto. Houve correção do transbordamento móvel causado pelo elemento acessível do cabeçalho da tabela; após correção, viewport e largura da página mediram 390px e campos ficaram dentro da tela.')
+if SITE:
+    p('<b>Demonstração pública</b><br/>O fluxo foi conferido via HTTPS em uma sessão nova. O solicitante abriu um chamado fictício, o técnico registrou uma mensagem e a solução, e o solicitante confirmou o resultado. O encerramento da sessão também foi conferido.')
 table(['Requisitos','Caso de uso','Evidência'],[
 ['RF-01, RF-08','UC-01, UC-07','Login, perfil e invalidação da sessão.'],
 ['RF-02, RF-03, RF-04','UC-02, UC-03','Validação, acesso por perfil e filtros combinados.'],

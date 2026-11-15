@@ -2,6 +2,8 @@
 
 Sistema de chamados com login, abertura, consulta, filtros, mensagens, atendimento e conclusão. Criado com assistência de IA para revisão e aprendizado de Filipe e sua dupla. A integração da segunda etapa foi realizada em 15/11/2026.
 
+[Abrir demonstração pública do ResolveTI](https://resolveti-unifran.onrender.com). A primeira abertura pode demorar se o serviço estiver em repouso. Use os botões **Solicitante** e **Técnico** e preencha os chamados com dados fictícios.
+
 ## Executar no computador
 Requer Node.js 24.14 ou superior.
 
@@ -30,7 +32,7 @@ Use Node.js 24.14 ou superior, comando de instalação `npm ci` e comando de in�
 - A versão completa em `../projeto-completo` é referência para estudo. Não copiar parcelas para criar um histórico fictício.
 
 ## Divisão proposta
-Integrante identificado: **Filipe Silva Rodrigues**. O segundo integrante ainda não foi identificado. Filipe deve revisar e explicar o projeto. Ao colega propõe-se validação independente, correções encontradas e revisão dos modelos, com sua própria conta e commits. Veja [o guia de colaboração](docs/COLABORACAO.md). Atendimento e conclusão já foram integrados; não são tarefas novas a atribuir ao colega.
+**Filipe Silva Rodrigues e Theo.** A contribuição proposta para Theo é validar os fluxos e implementar a ação **Limpar filtros**, usando a própria conta e seus commits. Veja [o plano com os arquivos e comandos](docs/PLANO-THEO.md).
 
 ## Git
 Commits registram alterações reais. Revisar com `git status` e `git diff`, adicionar somente arquivos da tarefa e escrever mensagens semânticas. Não há tarefa automática por hora e não há alteração de datas ou autoria.
@@ -52,7 +54,8 @@ Repositório: https://github.com/Filipesilva10/resolveti
 - [Documentação em PDF](entrega/ResolveTI-documentacao.pdf)
 - [Demonstração em MP4](entrega/ResolveTI-demonstracao.mp4)
 - [Documentação editável](docs/DOCUMENTACAO.md)
-- [Guia para seu colega](docs/COLABORACAO.md)
+- [Plano do Theo](docs/PLANO-THEO.md) e [modelo de validação](docs/modelos/VALIDACAO-THEO.md)
+- [Guia de colaboração](docs/COLABORACAO.md)
 - [Validação e roteiro de testes](docs/VALIDACAO.md)
 - [Como explicar o código](docs/GUIA-CODIGO.md)
 
