@@ -4,8 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { conferirSenha } from './banco.js';
 import { Usuario, Chamado, Mensagem } from './modelos.js';
 
-export function criarApp(banco) {
+export function criarApp(banco, { demonstracaoPublica = false } = {}) {
   const app = express();
+  // No Render, um proxy encaminha as requisições HTTPS ao processo Node.
+  if (demonstracaoPublica) app.set('trust proxy', 1);
   const sessoes = new Map();
   const tentativas = new Map();
   app.disable('x-powered-by');
@@ -51,7 +53,7 @@ export function criarApp(banco) {
   app.get('/api/eu', (req, res) => res.json(req.usuario));
   app.post('/api/sair', (req, res) => {
     sessoes.delete(req.token);
-    res.clearCookie('etapas');
+    res.clearCookie('etapas', { httpOnly: true, sameSite: 'strict', secure: req.secure });
     res.json({ ok: true });
   });
   const consulta = `SELECT c.*, u.nome AS solicitante, t.nome AS tecnico FROM chamados c
