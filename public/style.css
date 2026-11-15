@@ -388,6 +388,7 @@ table {
   min-width:700px
 }
 th {
+  position:relative;
   text-align:left;
   background:#f8faf9;
   color:#85978e;
