@@ -2,7 +2,7 @@
 
 Sistema de chamados com login, abertura, consulta, filtros, mensagens, atendimento e conclusão. Criado com assistência de IA para revisão e aprendizado de Filipe e sua dupla. A integração da segunda etapa foi realizada em 15/11/2026.
 
-## Executar
+## Executar no computador
 Requer Node.js 24.14 ou superior.
 
 ```powershell
@@ -13,7 +13,11 @@ npm start
 ```
 
 Abra http://localhost:3001. Na tela de login, escolha Solicitante ou Técnico para preencher a conta de demonstração. Contas: `solicitante@resolveti.local` e `tecnico@resolveti.local`, ambas com senha `Demo@123`.
-O banco é criado automaticamente em `dados/resolveti.sqlite`. Contas fictícias, uso local. Sessões ficam em memória e encerram ao reiniciar. Pode aparecer aviso experimental do SQLite.
+O banco é criado automaticamente em `dados/resolveti.sqlite`. As sessões encerram ao reiniciar. Pode aparecer aviso experimental do SQLite.
+
+## Modo de demonstração hospedada
+
+Use Node.js 24.14 ou superior, comando de instalação `npm ci` e comando de início `npm start`. Defina `RESOLVETI_DEMO=1` no serviço web. A aplicação escuta em `0.0.0.0` na porta indicada por `PORT`, e a hospedagem deve fornecer HTTPS por um proxy. O SQLite da demonstração fica em memória e começa novo a cada reinício. Visitantes usando a mesma conta fictícia compartilham os chamados. Use somente informações inventadas.
 
 ## Situação real
 - Implementado: login, logout, abertura, detalhes, consulta por perfil, busca por título/número, filtros combinados, mensagens, início e conclusão de atendimento.
@@ -54,7 +58,7 @@ Repositório: https://github.com/Filipesilva10/resolveti
 
 O PDF segue a ordem do enunciado consultado em 15/11/2026. Para entregar em dupla, atualize a identificação do colega e registre sua contribuição antes de enviar na BB. O vídeo é único para a dupla. Prazo informado pelo professor: 18/11/2026, às 21h00.
 
-Para regenerar o PDF: `python -m pip install reportlab`, depois `python scripts/gerar_documentacao.py`. O script também gera Markdown e diagramas SVG. A aplicação não depende de Python.
+Para regenerar o PDF, execute `python -m pip install reportlab`, depois `python scripts/gerar_documentacao.py`. Defina `RESOLVETI_INTEGRANTE_2` com o nome do colega para preencher a capa. Quando houver um endereço confirmado para a demonstração, defina `RESOLVETI_SITE_URL` com esse endereço para incluí-lo no PDF. O script também gera Markdown e diagramas SVG. A aplicação não depende de Python.
 
 ## Verificação
 Execute `npm test`. Os testes cobrem abertura, autorização por perfil, atribuição, mensagens, conclusão, persistência e filtros. As rotas são exercitadas em memória, sem abrir portas; isso não substitui a revisão visual no navegador.

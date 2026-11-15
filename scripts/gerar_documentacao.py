@@ -1,23 +1,28 @@
-"""Gera o documento de entrega. Dependências: reportlab, pypdf, pymupdf.
+"""Gera o documento de entrega. Dependência: reportlab.
 Execute na raiz: python scripts/gerar_documentacao.py
 """
+import os
 from pathlib import Path
 from xml.sax.saxutils import escape
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER
 from reportlab.graphics.shapes import Drawing, Rect, String, Line, Circle, Ellipse, Polygon
 from reportlab.graphics import renderSVG
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'entrega'
 OUT.mkdir(exist_ok=True)
+SITE = os.environ.get('RESOLVETI_SITE_URL', '').strip()
+REPO = 'https://github.com/Filipesilva10/resolveti'
+ENUNCIADO = 'https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9'
+COLEGA = escape(os.environ.get('RESOLVETI_INTEGRANTE_2', '').strip())
+CAPTURA = ROOT / 'docs' / 'imagens' / 'chamado-concluido.png'
 styles = getSampleStyleSheet()
-styles.add(ParagraphStyle(name='BodyPT', fontName='Helvetica', fontSize=10, leading=15, spaceAfter=9, textColor=colors.HexColor('#263d35')))
-styles.add(ParagraphStyle(name='SmallPT', parent=styles['BodyPT'], fontSize=8, leading=11, spaceAfter=3))
-styles.add(ParagraphStyle(name='TitlePT', fontSize=30, leading=35, textColor=colors.HexColor('#156d59'), spaceAfter=20))
-styles.add(ParagraphStyle(name='HeadPT', fontSize=18, leading=23, textColor=colors.HexColor('#156d59'), spaceAfter=16))
+styles.add(ParagraphStyle(name='BodyPT', fontName='Helvetica', fontSize=10.5, leading=15, spaceAfter=10, textColor=colors.HexColor('#263d35')))
+styles.add(ParagraphStyle(name='SmallPT', parent=styles['BodyPT'], fontSize=9, leading=13, spaceAfter=5))
+styles.add(ParagraphStyle(name='TitlePT', fontName='Helvetica-Bold', fontSize=44, leading=52, textColor=colors.HexColor('#125445'), spaceAfter=10))
+styles.add(ParagraphStyle(name='HeadPT', fontName='Helvetica-Bold', fontSize=20, leading=25, textColor=colors.HexColor('#125445'), spaceAfter=16))
 story=[]
 source=[]
 def p(s,small=False):
@@ -27,13 +32,16 @@ def page(title):
     if story: story.append(PageBreak())
     story.append(Paragraph(title,styles['HeadPT']))
     source.append('\n## '+title+'\n')
+def link(url):
+    safe = escape(url, {'"': '&quot;'})
+    return f'<link href="{safe}" color="#156d59"><u>{safe}</u></link>'
 def table(headers, rows, widths):
     cells=[[Paragraph(escape(str(x)),styles['SmallPT']) for x in row] for row in [headers]+rows]
     t=Table(cells,colWidths=widths,repeatRows=1,hAlign='LEFT')
     t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e4f1eb')),('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),7),('RIGHTPADDING',(0,0),(-1,-1),7),('TOPPADDING',(0,0),(-1,-1),7),('BOTTOMPADDING',(0,0),(-1,-1),7),('LINEBELOW',(0,0),(-1,0),.7,colors.HexColor('#156d59')),('LINEBELOW',(0,1),(-1,-1),.3,colors.HexColor('#d9e3de'))]))
     story.append(t);story.append(Spacer(1,12))
     source.append('| '+' | '.join(headers)+' |\n| '+' | '.join(['---']*len(headers))+' |')
-    source.extend('| '+' | '.join(str(x) for x in row)+' |' for row in rows)
+    source.extend('| '+' | '.join(str(x).replace('|', '\\|') for x in row)+' |' for row in rows)
 def txt(d,x,y,s,size=9):d.add(String(x,y,s,fontName='Helvetica',fontSize=size,fillColor=colors.HexColor('#263d35')))
 def line(d,x1,y1,x2,y2):d.add(Line(x1,y1,x2,y2,strokeColor=colors.HexColor('#738a80'),strokeWidth=1))
 def actor(d,x,y,name):
@@ -58,27 +66,33 @@ def classes():
     box(5,230,190,195,'Usuario',['+ id: number','+ nome, email: string','+ perfil: string'],['+ constructor(dados: object)','+ ehTecnico(): boolean','+ podeConsultar(c: Chamado): boolean'])
     box(235,155,245,270,'Chamado',['+ id, solicitante_id: number','+ tecnico_id: number | null','+ titulo, descricao: string','+ categoria, prioridade, status: string','+ solucao: string | null','+ criado_em: string','+ concluido_em: string | null','+ solicitante: string','+ tecnico: string | null'],['+ constructor(dados: object)','+ validar(dados: object): object {static}','+ iniciar(usuario: Usuario): void','+ concluir(usuario: Usuario,','    solucao: string): void'])
     box(235,20,245,105,'Mensagem',['+ conteudo: string'],['+ constructor(conteudo: string)'])
-    line(d,190,360,235,360);txt(d,195,369,'1',8);txt(d,215,369,'0..*',8);txt(d,195,346,'abre',8)
-    line(d,190,285,235,285);txt(d,193,294,'0..1',8);txt(d,215,294,'0..*',8);txt(d,192,271,'atende',8)
+    line(d,195,360,235,360);txt(d,198,369,'1',8);txt(d,216,369,'0..*',8);txt(d,206,346,'abre',8)
+    line(d,195,285,235,285);txt(d,197,294,'0..1',8);txt(d,216,294,'0..*',8);txt(d,203,271,'atende',8)
     return d
 
-story.append(Spacer(1,55));story.append(Paragraph('ResolveTI',styles['TitlePT']))
+story.append(Spacer(1,58))
+p('<b>UNIFRAN · CIÊNCIA DA COMPUTAÇÃO</b>')
+story.append(Spacer(1,30))
+story.append(Paragraph('ResolveTI',styles['TitlePT']))
 p('<b>Central de chamados de suporte técnico</b>')
-p('Trabalho Prático - Documentação e Implementação Inicial de um Projeto de Software')
-p('UNIFRAN · Ciência da Computação<br/>Análise e Projeto de Sistemas<br/>Professor: Euller')
-story.append(Spacer(1,35));p('<b>Integrante identificado:</b> Filipe Silva Rodrigues')
-p('<b>Participação em dupla:</b> nome do segundo integrante ainda não informado. Confirmar identificação e contribuição efetiva antes da submissão. Este documento não atribui trabalho a uma pessoa não identificada.')
-p('Versão de entrega preparada em 15/11/2026 · Franca/SP')
-p('Repositório público:<br/><link href="https://github.com/Filipesilva10/resolveti" color="#156d59">https://github.com/Filipesilva10/resolveti</link>')
-p('Sistema implementado com assistência de IA, sujeito à revisão e compreensão dos integrantes. Contas e chamados de demonstração são fictícios.')
+p('Trabalho Prático de Documentação e Implementação Inicial de um Projeto de Software')
+story.append(Spacer(1,38))
+p('<b>Disciplina</b><br/>Análise e Projeto de Sistemas')
+p('<b>Integrantes</b><br/>Filipe Silva Rodrigues' + (f'<br/>{COLEGA}' if COLEGA else '<br/>Segundo integrante a identificar para a entrega em dupla'))
+p('<b>Repositório público</b><br/>' + link(REPO))
+if SITE:
+    p('<b>Demonstração no navegador</b><br/>' + link(SITE))
+story.append(Spacer(1,25))
+p('Franca, SP · 15 de novembro de 2026')
+p('Projeto acadêmico desenvolvido com assistência de IA.', True)
 page('1. Contexto, objetivo e escopo')
 p('Problemas de TI recebidos por conversas avulsas dificultam descobrir quem solicitou ajuda, quem assumiu o atendimento e qual solução foi aplicada. O ResolveTI organiza esse ciclo em um registro único, com situação, responsável e histórico de mensagens.')
 p('<b>Objetivo:</b> permitir que um solicitante abra e acompanhe chamados e que um técnico organize a fila, assuma atendimentos e registre a solução. O escopo prioriza um sistema pequeno, funcional e explicável no segundo ano de Ciência da Computação.')
 table(['Ator','Responsabilidades'],[['Solicitante','Autenticar-se; abrir chamados; consultar e filtrar seus próprios chamados; enviar mensagens enquanto não concluídos; consultar a solução.'],['Técnico','Autenticar-se; consultar todos os chamados; filtrar; iniciar atendimento; enviar mensagens; concluir somente os chamados sob sua responsabilidade.']],[90,390])
 p('<b>Incluído:</b> login/logout, criação, consulta, filtros, mensagens, atribuição, conclusão e armazenamento SQLite local. O painel apresenta totais dos chamados visíveis ao perfil. Os totais não mudam com o filtro da tabela.')
-p('<b>Fora do escopo:</b> cadastro público, recuperação de senha, anexos, e-mail, SLA, exclusão/reabertura pela interface, múltiplas organizações, aplicativo nativo e implantação pública.')
-p('<b>Premissas:</b> uso acadêmico local, contas previamente cadastradas, navegador moderno e Node.js 24.14 ou superior. Não houve entrevista formal com usuários; os requisitos foram elaborados a partir do problema proposto e validados contra a implementação.')
-p('<b>Organização do documento:</b> requisitos e regras; casos de uso; classes de análise e projeto; persistência; arquitetura; validação; execução e entrega.')
+p('<b>Fora do escopo</b><br/>Cadastro público, recuperação de senha, anexos, notificações, nível de serviço, exclusão ou reabertura de chamados, múltiplas organizações e aplicativo nativo.')
+p('<b>Ambientes</b><br/>A execução local usa Node.js 24.14 ou superior e preserva os chamados em um arquivo SQLite. O modo de demonstração usa contas fictícias e recria o banco ao iniciar. Os dois modos executam os mesmos fluxos de chamados.')
+p('<b>Origem dos requisitos</b><br/>Os requisitos foram formulados a partir do problema proposto e conferidos contra o código e os fluxos da aplicação.')
 page('2. Requisitos funcionais')
 table(['ID','Requisito e critério de aceitação'],[
 ['RF-01','Autenticar: e-mail/senha corretos retornam o perfil; credenciais inválidas são rejeitadas.'],
@@ -86,13 +100,13 @@ table(['ID','Requisito e critério de aceitação'],[
 ['RF-03','Consultar: solicitante vê somente seus chamados; técnico vê todos. Detalhes incluem responsável, mensagens, datas e solução.'],
 ['RF-04','Filtrar: combinar título/número, situação e prioridade. Busca por título ignora acentos e caixa; número é exato e aceita #001.'],
 ['RF-05','Iniciar: técnico assume chamado Aberto; passa a responsável e muda status para Em atendimento.'],
-['RF-06','Mensagem: solicitante autor ou qualquer técnico registra conteúdo, autor e data, enquanto o chamado não está concluído.'],
+['RF-06','Registrar mensagem: solicitante autor ou qualquer técnico registra conteúdo, autor e data, enquanto o chamado não está concluído.'],
 ['RF-07','Concluir: somente técnico responsável registra solução e data final em chamado Em atendimento.'],
 ['RF-08','Sair: invalidar sessão no servidor, limpar cookie e retornar ao login.']],[55,425])
 p('<b>Prioridade:</b> todos os requisitos acima pertencem ao núcleo implementado. Melhorias fora do escopo poderão ser planejadas depois da entrega.')
 page('3. Qualidade e regras de negócio')
 table(['ID','Requisito não funcional / verificação'],[
-['RNF-01','Persistência: reabrir o mesmo arquivo SQLite preserva chamados e mensagens; coberto por teste.'],
+['RNF-01','Persistência local: reabrir o mesmo arquivo SQLite conserva chamados e mensagens. No modo de demonstração o banco é temporário.'],
 ['RNF-02','Sessão: cookie HttpOnly, SameSite=Strict; validade de 8 horas e invalidação no logout. Reiniciar o servidor encerra sessões.'],
 ['RNF-03','Senhas: armazenar hash scrypt com sal individual; não guardar senha em texto puro. Contas demo têm credenciais públicas intencionais.'],
 ['RNF-04','Interface: formulários utilizáveis em 390px e 1366px; tabela pode ter rolagem própria. Conferência visual e medidas no navegador.'],
@@ -106,7 +120,7 @@ table(['ID','Regra'],[
 ['RN-06','Somente responsável conclui; deve estar Em atendimento; solução tem 10 a 2000 caracteres.'],
 ['RN-07','Mensagem tem 1 a 1000 caracteres; chamado Concluído não recebe mensagens.']],[60,420])
 page('4. Diagrama de casos de uso')
-p('A fronteira delimita o sistema. Linhas representam associação entre ator e caso de uso. Autenticação é uma precondição dos casos protegidos; não há uso artificial de include/extend.')
+p('A fronteira delimita o sistema e as linhas associam cada ator aos casos de uso dos quais participa. Os casos protegidos exigem uma sessão ativa criada previamente em Autenticar.')
 uc=usecase();story.append(uc)
 renderSVG.drawToFile(uc,str(ROOT/'docs'/'imagens'/'casos-de-uso.svg'))
 source.append('![Diagrama de casos de uso](imagens/casos-de-uso.svg)')
@@ -135,12 +149,14 @@ renderSVG.drawToFile(cl,str(ROOT/'docs'/'imagens'/'classes.svg'))
 source.append('![Diagrama de classes de projeto](imagens/classes.svg)')
 p('Diagrama de projeto: classes exportadas por src/modelos.js. “+” indica membro público; validar é estático. Perfis são valores de Usuario, não subclasses. Um usuário abre zero ou muitos chamados; cada chamado tem um solicitante. Um técnico atende zero ou muitos chamados; cada chamado tem zero ou um técnico.',True)
 p('Mensagem valida conteúdo; ID, autor e chamado são persistidos pela rota. Os relacionamentos mostrados são associações, resolvidas por IDs/SQL; não há herança ou composição de objetos. Parâmetros object são registros com os atributos indicados; validar retorna título, descrição, categoria e prioridade validados. Construtores criam a própria instância, sem tipo de retorno em UML.',True)
-page('8. Repositório')
-p('<link href="https://github.com/Filipesilva10/resolveti" color="#156d59">https://github.com/Filipesilva10/resolveti</link>')
-p('Repositório público, acessível ao professor EullerF. Contém código, testes, documentação editável, diagramas, PDF e vídeo de demonstração. Os commits registram evolução real, sem alterar datas ou atribuir trabalho a outro integrante.')
-p('As seções anteriores seguem a ordem exigida: capa, descrição, requisitos, casos de uso, classes e repositório. Os apêndices detalham banco, arquitetura, validação e execução.')
-p('<b>Dupla:</b> o enunciado exige commits de ambos os integrantes e rejeita entregas com participação de apenas um no histórico. Nome e contribuição do segundo integrante ainda precisam ser concluídos. O guia docs/COLABORACAO.md orienta clone, revisão independente, branch, commit, push e pull request.')
-p('<b>Processo:</b> implementação inicial publicada em 14/11/2026; integração de atendimento, mensagens, filtros e conclusão em 15/11/2026; revisão visual, correção móvel e preparação dos entregáveis em 15/11/2026. Não se afirma que tarefas assistidas foram feitas manualmente pelos integrantes.')
+page('8. Repositório e acesso à implementação')
+p('<b>Repositório Git público</b><br/>' + link(REPO))
+p('O repositório contém a implementação, os testes, os diagramas e os arquivos de entrega. O README explica como executar o projeto. O histórico registra a abertura inicial de chamados, a integração do atendimento, a correção móvel e a preparação da demonstração.')
+if SITE:
+    p('<b>Testar no navegador</b><br/>' + link(SITE))
+    p('Selecione Solicitante ou Técnico na tela de login para preencher a conta de teste. Caso o serviço esteja em repouso, aguarde o carregamento inicial. Os chamados de demonstração são compartilhados por quem usa as contas fictícias e podem sumir quando o serviço reiniciar. Use somente dados fictícios.')
+p('<b>Roteiro de avaliação</b><br/>Entre como solicitante e abra um chamado. Troque para o técnico, filtre pelo título e inicie o atendimento. Envie uma mensagem e conclua com uma solução. Retorne ao solicitante e confira a situação e a solução nos detalhes.')
+p('<b>Entregáveis previstos no enunciado</b><br/>PDF consolidado, vídeo MP4 de até um minuto e link do repositório público. A submissão é pela BB até 18/11/2026 às 21h. Em dupla, o enunciado exige commits dos dois integrantes.')
 page('Apêndice A. Modelo de dados')
 table(['Tabela','Campos e restrições'],[
 ['usuarios','id INTEGER PK; nome TEXT obrigatório; email TEXT obrigatório e UNIQUE; senha TEXT obrigatório (sal:hash); perfil TEXT com CHECK solicitante/tecnico.'],
@@ -154,23 +170,30 @@ page('Apêndice B. Arquitetura e implementação')
 table(['Camada / arquivo','Papel'],[['public/index.html e style.css','Estrutura das telas, formulários e aparência responsiva.'],['public/app.js e filtros.js','Eventos, fetch, montagem segura do DOM com textContent, busca e filtros em memória.'],['src/server.js','Abre banco e servidor HTTP em 127.0.0.1:3001.'],['src/app.js','Rotas Express, sessão, autorização, validação de entrada e comandos SQL parametrizados.'],['src/modelos.js','Usuario, Chamado e Mensagem: regras de domínio simples.'],['src/banco.js','Schema, contas demo, hash de senhas e abertura SQLite.'],['test/','Testes de rotas/domínio, persistência e filtros.']],[175,305])
 p('Fluxo: navegador envia JSON via fetch; Express verifica sessão e perfil, aplica regras, consulta ou altera SQLite e devolve JSON. A interface atualiza o conteúdo. Não há framework de interface, ORM, compilação ou serviço de banco separado.')
 table(['Método / rota','Finalidade'],[['POST /api/login; GET /api/eu; POST /api/sair','Autenticar, recuperar sessão e sair.'],['GET /api/chamados; POST /api/chamados','Listar conforme perfil e criar.'],['GET /api/chamados/:id','Consultar detalhes e mensagens.'],['POST /api/chamados/:id/iniciar','Assumir atendimento.'],['POST /api/chamados/:id/mensagens','Registrar mensagem.'],['POST /api/chamados/:id/concluir','Registrar solução e encerrar.']],[260,220])
-p('Proteções implementadas: senhas com sal/scrypt, cookie HttpOnly/SameSite, JSON obrigatório em alterações, bloqueio de sec-fetch-site cross-site, SQL parametrizado, CSP e textContent. Limitações: sessões e limite de tentativas ficam em memória; não há HTTPS local, recuperação de senha, monitoramento ou validação de carga. Não se apresenta esta versão como pronta para exposição pública.',True)
+p('As senhas usam scrypt com sal. O cookie tem HttpOnly e SameSite=Strict e recebe Secure sob HTTPS. Alterações exigem JSON, as consultas SQL usam parâmetros e a interface insere conteúdo com textContent. Sessões e limite de tentativas ficam na memória de um processo. Essas escolhas atendem ao uso acadêmico com contas fictícias.',True)
 page('Apêndice C. Validação e evidências')
 p('<b>Automação:</b> 19 testes aprovados. As requisições passam pelo Express com transporte em memória e bancos temporários; não usam servidor HTTP real. Cobrem criação, validação, privacidade entre solicitantes, atribuição, mensagens, conclusão, persistência e filtros.')
 p('<b>Navegador:</b> em 15/11/2026 foram executados login, abertura, busca combinada com prioridade, início, mensagem, solução e consulta pelo solicitante. Após concluir, o formulário de mensagens ficou oculto. Houve correção do transbordamento móvel causado pelo elemento acessível do cabeçalho da tabela; após correção, viewport e largura da página mediram 390px e campos ficaram dentro da tela.')
-table(['Área','Evidência / limite'],[['Filtros','Testes de acento, caixa, número exato e combinação; busca real pela interface.'],['Autorização','Outro solicitante não consulta; outro técnico não conclui chamado alheio; testes automatizados.'],['Persistência','Fechar/reabrir banco temporário preserva informações; teste automatizado.'],['Interface','Revisão de listagem, cadastro e detalhes; desktop e formulário móvel. Sem auditoria completa de acessibilidade.'],['Demonstração','MP4 gravado da aplicação real, com abertura, atendimento, mensagem e conclusão; duração medida no arquivo.']],[105,375])
-p('A validação independente do colega continua proposta em docs/VALIDACAO.md. Não há afirmação de que ele já executou os testes. Melhorias e limitações devem ser descritas conforme observadas, sem alterar os resultados para parecerem aprovados.')
+table(['Requisitos','Caso de uso','Evidência'],[
+['RF-01, RF-08','UC-01, UC-07','Login, perfil e invalidação da sessão.'],
+['RF-02, RF-03, RF-04','UC-02, UC-03','Validação, acesso por perfil e filtros combinados.'],
+['RF-05, RF-06, RF-07','UC-04 a UC-06','Atribuição, mensagem com autor e encerramento por responsável.'],
+['RNF-01, RNF-04','UC-02, UC-03','Chamado preservado ao reabrir o arquivo local e formulário conferido em 390 px.'],
+],[130,110,240])
+if CAPTURA.exists():
+    shot = Image(str(CAPTURA), width=460, height=300)
+    story.append(shot)
+    p('Figura. Chamado concluído visto pelo solicitante após o atendimento.', True)
+    source.append('![Chamado concluído](imagens/chamado-concluido.png)')
 page('Apêndice D. Execução, Git e entrega')
 p('<b>Executar a partir do GitHub:</b><br/>git clone https://github.com/Filipesilva10/resolveti.git<br/>cd resolveti<br/>npm ci<br/>npm test<br/>npm start<br/>Abrir http://localhost:3001')
 p('Requer Node.js 24.14+ e Git para clonar. Contas: solicitante@resolveti.local, ana@resolveti.local e tecnico@resolveti.local. Senha: Demo@123. Os botões da tela de login preenchem os dois perfis principais. Ctrl+C encerra o servidor.')
-p('<b>Versionamento:</b> repositório público com commits semânticos. Integração de atendimento publicada em 15/11/2026. A publicação inicial usou conector; posteriormente git fetch voltou a funcionar e a branch de entrega passou a seguir o histórico remoto. O histórico local anterior foi preservado em backup. Para colaborar, usar clone do GitHub, branch por tarefa e pull request. Guia completo em docs/COLABORACAO.md.')
-p('<b>Divisão:</b> Filipe acompanha a integração e deve compreender abertura, validações e fluxos. Para o colega, propõe-se validação independente, correções encontradas e revisão dos modelos. A divisão é proposta; contribuição, nome e autoria de commits devem refletir o trabalho efetivamente realizado.')
-p('<b>Entregáveis:</b> este PDF com link do repositório; entrega/ResolveTI-demonstracao.mp4 (até 1 minuto); repositório público. Prazo informado no enunciado: 18/11/2026 às 21h00. A versão foi preparada em 15/11/2026 para a antecipação solicitada.')
-p('<b>Conferência antes de submeter:</b> identificar o segundo integrante se a entrega for em dupla; revisar o PDF; assistir ao MP4; testar o clone; conferir acesso ao repositório; enviar os arquivos no canal definido pelo professor. Preparar arquivos não significa submetê-los ao ambiente acadêmico.')
-p('<b>Referências:</b> enunciado “Trabalho Prático - Documentação e Implementação Inicial de um Projeto de Software”, consultado no Notion pelo navegador em 15/11/2026; código e testes deste repositório. O enunciado define envio pela BB, PDF na ordem adotada, vídeo até 1 minuto, commits semânticos e participação de ambos em dupla.',True)
-p('<link href="https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9" color="#156d59">Enunciado do professor no Notion</link>',True)
+p('<b>Arquivos no repositório</b><br/>entrega/ResolveTI-documentacao.pdf<br/>entrega/ResolveTI-demonstracao.mp4<br/>docs/VALIDACAO.md')
+p('<b>Referências</b><br/>Enunciado do trabalho prático, consultado em 15/11/2026. ' + link(ENUNCIADO), True)
+p('Implementação e testes do ResolveTI. ' + link(REPO), True)
 
 def footer(c,doc):
+    c.setFillColor(colors.HexColor('#125445'));c.rect(0,833,595.28,9,fill=1,stroke=0)
     c.setStrokeColor(colors.HexColor('#d9e3de'));c.line(48,42,547,42)
     c.setFont('Helvetica',8);c.setFillColor(colors.HexColor('#71817c'));c.drawString(48,29,'ResolveTI | Análise e Projeto de Sistemas | 15/11/2026');c.drawRightString(547,29,str(doc.page))
 doc=SimpleDocTemplate(str(OUT/'ResolveTI-documentacao.pdf'),pagesize=(595.28,841.89),rightMargin=55,leftMargin=55,topMargin=48,bottomMargin=58,title='ResolveTI - Documentação do projeto',author='Filipe Silva Rodrigues')

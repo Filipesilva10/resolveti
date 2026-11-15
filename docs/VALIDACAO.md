@@ -4,7 +4,7 @@ Data: 15/11/2026. Ambiente: Windows, Node.js 24.14, Chromium, SQLite local. Exec
 
 ## Testes automatizados
 
-`npm test`: 19 testes aprovados na integração de atendimento. Testes exercitam rotas Express em memória, validações, perfis, atribuição, mensagens, conclusão, persistência e filtros. Não substituem teste do navegador nem teste de carga.
+`npm test`: 19 testes aprovados após a preparação do modo de demonstração. Testes exercitam rotas Express em memória, validações, perfis, atribuição, mensagens, conclusão, persistência e filtros.
 
 ## Revisão no navegador
 
@@ -17,6 +17,7 @@ Data: 15/11/2026. Ambiente: Windows, Node.js 24.14, Chromium, SQLite local. Exec
 | Concluir com solução | Status Concluído, solução e data exibidos. |
 | Mensagens após conclusão | Formulário oculto; bloqueio da API coberto pelos testes. |
 | Voltar ao perfil solicitante | Solução e status final visíveis ao autor. |
+| Gravação da demonstração | O fluxo foi executado com cliques e digitação reais no Chromium. O cursor e as legendas foram adicionados à captura para acompanhar as ações. |
 | Listagem em viewport móvel de 390px | Identificado transbordamento de elemento acessível no cabeçalho da tabela; corrigido com posicionamento relativo no th. |
 
 ## Roteiro para a validação independente da dupla

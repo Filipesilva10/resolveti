@@ -44,14 +44,14 @@
 			<text x="243" y="82" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,164) scale(1,-1)">+ conteudo: string</text>
 			<path d="M 235,73 L 480,73 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
 			<text x="243" y="59" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,118) scale(1,-1)">+ constructor(conteudo: string)</text>
-			<path d="M 190,360 L 235,360 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
-			<text x="195" y="369" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,738) scale(1,-1)">1</text>
-			<text x="215" y="369" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,738) scale(1,-1)">0..*</text>
-			<text x="195" y="346" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,692) scale(1,-1)">abre</text>
-			<path d="M 190,285 L 235,285 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
-			<text x="193" y="294" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,588) scale(1,-1)">0..1</text>
-			<text x="215" y="294" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,588) scale(1,-1)">0..*</text>
-			<text x="192" y="271" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,542) scale(1,-1)">atende</text>
+			<path d="M 195,360 L 235,360 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="198" y="369" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,738) scale(1,-1)">1</text>
+			<text x="216" y="369" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,738) scale(1,-1)">0..*</text>
+			<text x="206" y="346" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,692) scale(1,-1)">abre</text>
+			<path d="M 195,285 L 235,285 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="197" y="294" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,588) scale(1,-1)">0..1</text>
+			<text x="216" y="294" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,588) scale(1,-1)">0..*</text>
+			<text x="203" y="271" style="font-family: Helvetica; font-size: 8px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,542) scale(1,-1)">atende</text>
 		</g>
 	</g>
 </svg>

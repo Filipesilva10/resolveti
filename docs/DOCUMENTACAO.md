@@ -1,20 +1,20 @@
 # ResolveTI - documentação consolidada
 
+<b>UNIFRAN · CIÊNCIA DA COMPUTAÇÃO</b>
+
 <b>Central de chamados de suporte técnico</b>
 
-Trabalho Prático - Documentação e Implementação Inicial de um Projeto de Software
+Trabalho Prático de Documentação e Implementação Inicial de um Projeto de Software
 
-UNIFRAN · Ciência da Computação<br/>Análise e Projeto de Sistemas<br/>Professor: Euller
+<b>Disciplina</b><br/>Análise e Projeto de Sistemas
 
-<b>Integrante identificado:</b> Filipe Silva Rodrigues
+<b>Integrantes</b><br/>Filipe Silva Rodrigues<br/>Segundo integrante a identificar para a entrega em dupla
 
-<b>Participação em dupla:</b> nome do segundo integrante ainda não informado. Confirmar identificação e contribuição efetiva antes da submissão. Este documento não atribui trabalho a uma pessoa não identificada.
+<b>Repositório público</b><br/><link href="https://github.com/Filipesilva10/resolveti" color="#156d59"><u>https://github.com/Filipesilva10/resolveti</u></link>
 
-Versão de entrega preparada em 15/11/2026 · Franca/SP
+Franca, SP · 15 de novembro de 2026
 
-Repositório público:<br/><link href="https://github.com/Filipesilva10/resolveti" color="#156d59">https://github.com/Filipesilva10/resolveti</link>
-
-Sistema implementado com assistência de IA, sujeito à revisão e compreensão dos integrantes. Contas e chamados de demonstração são fictícios.
+Projeto acadêmico desenvolvido com assistência de IA.
 
 
 ## 1. Contexto, objetivo e escopo
@@ -33,11 +33,11 @@ Problemas de TI recebidos por conversas avulsas dificultam descobrir quem solici
 
 <b>Incluído:</b> login/logout, criação, consulta, filtros, mensagens, atribuição, conclusão e armazenamento SQLite local. O painel apresenta totais dos chamados visíveis ao perfil. Os totais não mudam com o filtro da tabela.
 
-<b>Fora do escopo:</b> cadastro público, recuperação de senha, anexos, e-mail, SLA, exclusão/reabertura pela interface, múltiplas organizações, aplicativo nativo e implantação pública.
+<b>Fora do escopo</b><br/>Cadastro público, recuperação de senha, anexos, notificações, nível de serviço, exclusão ou reabertura de chamados, múltiplas organizações e aplicativo nativo.
 
-<b>Premissas:</b> uso acadêmico local, contas previamente cadastradas, navegador moderno e Node.js 24.14 ou superior. Não houve entrevista formal com usuários; os requisitos foram elaborados a partir do problema proposto e validados contra a implementação.
+<b>Ambientes</b><br/>A execução local usa Node.js 24.14 ou superior e preserva os chamados em um arquivo SQLite. O modo de demonstração usa contas fictícias e recria o banco ao iniciar. Os dois modos executam os mesmos fluxos de chamados.
 
-<b>Organização do documento:</b> requisitos e regras; casos de uso; classes de análise e projeto; persistência; arquitetura; validação; execução e entrega.
+<b>Origem dos requisitos</b><br/>Os requisitos foram formulados a partir do problema proposto e conferidos contra o código e os fluxos da aplicação.
 
 
 ## 2. Requisitos funcionais
@@ -56,7 +56,7 @@ Problemas de TI recebidos por conversas avulsas dificultam descobrir quem solici
 
 | RF-05 | Iniciar: técnico assume chamado Aberto; passa a responsável e muda status para Em atendimento. |
 
-| RF-06 | Mensagem: solicitante autor ou qualquer técnico registra conteúdo, autor e data, enquanto o chamado não está concluído. |
+| RF-06 | Registrar mensagem: solicitante autor ou qualquer técnico registra conteúdo, autor e data, enquanto o chamado não está concluído. |
 
 | RF-07 | Concluir: somente técnico responsável registra solução e data final em chamado Em atendimento. |
 
@@ -71,7 +71,7 @@ Problemas de TI recebidos por conversas avulsas dificultam descobrir quem solici
 | ID | Requisito não funcional / verificação |
 | --- | --- |
 
-| RNF-01 | Persistência: reabrir o mesmo arquivo SQLite preserva chamados e mensagens; coberto por teste. |
+| RNF-01 | Persistência local: reabrir o mesmo arquivo SQLite conserva chamados e mensagens. No modo de demonstração o banco é temporário. |
 
 | RNF-02 | Sessão: cookie HttpOnly, SameSite=Strict; validade de 8 horas e invalidação no logout. Reiniciar o servidor encerra sessões. |
 
@@ -102,7 +102,7 @@ Problemas de TI recebidos por conversas avulsas dificultam descobrir quem solici
 ## 4. Diagrama de casos de uso
 
 
-A fronteira delimita o sistema. Linhas representam associação entre ator e caso de uso. Autenticação é uma precondição dos casos protegidos; não há uso artificial de include/extend.
+A fronteira delimita o sistema e as linhas associam cada ator aos casos de uso dos quais participa. Os casos protegidos exigem uma sessão ativa criada previamente em Autenticar.
 
 ![Diagrama de casos de uso](imagens/casos-de-uso.svg)
 
@@ -168,18 +168,16 @@ Diagrama de projeto: classes exportadas por src/modelos.js. “+” indica membr
 Mensagem valida conteúdo; ID, autor e chamado são persistidos pela rota. Os relacionamentos mostrados são associações, resolvidas por IDs/SQL; não há herança ou composição de objetos. Parâmetros object são registros com os atributos indicados; validar retorna título, descrição, categoria e prioridade validados. Construtores criam a própria instância, sem tipo de retorno em UML.
 
 
-## 8. Repositório
+## 8. Repositório e acesso à implementação
 
 
-<link href="https://github.com/Filipesilva10/resolveti" color="#156d59">https://github.com/Filipesilva10/resolveti</link>
+<b>Repositório Git público</b><br/><link href="https://github.com/Filipesilva10/resolveti" color="#156d59"><u>https://github.com/Filipesilva10/resolveti</u></link>
 
-Repositório público, acessível ao professor EullerF. Contém código, testes, documentação editável, diagramas, PDF e vídeo de demonstração. Os commits registram evolução real, sem alterar datas ou atribuir trabalho a outro integrante.
+O repositório contém a implementação, os testes, os diagramas e os arquivos de entrega. O README explica como executar o projeto. O histórico registra a abertura inicial de chamados, a integração do atendimento, a correção móvel e a preparação da demonstração.
 
-As seções anteriores seguem a ordem exigida: capa, descrição, requisitos, casos de uso, classes e repositório. Os apêndices detalham banco, arquitetura, validação e execução.
+<b>Roteiro de avaliação</b><br/>Entre como solicitante e abra um chamado. Troque para o técnico, filtre pelo título e inicie o atendimento. Envie uma mensagem e conclua com uma solução. Retorne ao solicitante e confira a situação e a solução nos detalhes.
 
-<b>Dupla:</b> o enunciado exige commits de ambos os integrantes e rejeita entregas com participação de apenas um no histórico. Nome e contribuição do segundo integrante ainda precisam ser concluídos. O guia docs/COLABORACAO.md orienta clone, revisão independente, branch, commit, push e pull request.
-
-<b>Processo:</b> implementação inicial publicada em 14/11/2026; integração de atendimento, mensagens, filtros e conclusão em 15/11/2026; revisão visual, correção móvel e preparação dos entregáveis em 15/11/2026. Não se afirma que tarefas assistidas foram feitas manualmente pelos integrantes.
+<b>Entregáveis previstos no enunciado</b><br/>PDF consolidado, vídeo MP4 de até um minuto e link do repositório público. A submissão é pela BB até 18/11/2026 às 21h. Em dupla, o enunciado exige commits dos dois integrantes.
 
 
 ## Apêndice A. Modelo de dados
@@ -240,7 +238,7 @@ Fluxo: navegador envia JSON via fetch; Express verifica sessão e perfil, aplica
 
 | POST /api/chamados/:id/concluir | Registrar solução e encerrar. |
 
-Proteções implementadas: senhas com sal/scrypt, cookie HttpOnly/SameSite, JSON obrigatório em alterações, bloqueio de sec-fetch-site cross-site, SQL parametrizado, CSP e textContent. Limitações: sessões e limite de tentativas ficam em memória; não há HTTPS local, recuperação de senha, monitoramento ou validação de carga. Não se apresenta esta versão como pronta para exposição pública.
+As senhas usam scrypt com sal. O cookie tem HttpOnly e SameSite=Strict e recebe Secure sob HTTPS. Alterações exigem JSON, as consultas SQL usam parâmetros e a interface insere conteúdo com textContent. Sessões e limite de tentativas ficam na memória de um processo. Essas escolhas atendem ao uso acadêmico com contas fictícias.
 
 
 ## Apêndice C. Validação e evidências
@@ -250,20 +248,20 @@ Proteções implementadas: senhas com sal/scrypt, cookie HttpOnly/SameSite, JSON
 
 <b>Navegador:</b> em 15/11/2026 foram executados login, abertura, busca combinada com prioridade, início, mensagem, solução e consulta pelo solicitante. Após concluir, o formulário de mensagens ficou oculto. Houve correção do transbordamento móvel causado pelo elemento acessível do cabeçalho da tabela; após correção, viewport e largura da página mediram 390px e campos ficaram dentro da tela.
 
-| Área | Evidência / limite |
-| --- | --- |
+| Requisitos | Caso de uso | Evidência |
+| --- | --- | --- |
 
-| Filtros | Testes de acento, caixa, número exato e combinação; busca real pela interface. |
+| RF-01, RF-08 | UC-01, UC-07 | Login, perfil e invalidação da sessão. |
 
-| Autorização | Outro solicitante não consulta; outro técnico não conclui chamado alheio; testes automatizados. |
+| RF-02, RF-03, RF-04 | UC-02, UC-03 | Validação, acesso por perfil e filtros combinados. |
 
-| Persistência | Fechar/reabrir banco temporário preserva informações; teste automatizado. |
+| RF-05, RF-06, RF-07 | UC-04 a UC-06 | Atribuição, mensagem com autor e encerramento por responsável. |
 
-| Interface | Revisão de listagem, cadastro e detalhes; desktop e formulário móvel. Sem auditoria completa de acessibilidade. |
+| RNF-01, RNF-04 | UC-02, UC-03 | Chamado preservado ao reabrir o arquivo local e formulário conferido em 390 px. |
 
-| Demonstração | MP4 gravado da aplicação real, com abertura, atendimento, mensagem e conclusão; duração medida no arquivo. |
+Figura. Chamado concluído visto pelo solicitante após o atendimento.
 
-A validação independente do colega continua proposta em docs/VALIDACAO.md. Não há afirmação de que ele já executou os testes. Melhorias e limitações devem ser descritas conforme observadas, sem alterar os resultados para parecerem aprovados.
+![Chamado concluído](imagens/chamado-concluido.png)
 
 
 ## Apêndice D. Execução, Git e entrega
@@ -273,14 +271,8 @@ A validação independente do colega continua proposta em docs/VALIDACAO.md. Nã
 
 Requer Node.js 24.14+ e Git para clonar. Contas: solicitante@resolveti.local, ana@resolveti.local e tecnico@resolveti.local. Senha: Demo@123. Os botões da tela de login preenchem os dois perfis principais. Ctrl+C encerra o servidor.
 
-<b>Versionamento:</b> repositório público com commits semânticos. Integração de atendimento publicada em 15/11/2026. A publicação inicial usou conector; posteriormente git fetch voltou a funcionar e a branch de entrega passou a seguir o histórico remoto. O histórico local anterior foi preservado em backup. Para colaborar, usar clone do GitHub, branch por tarefa e pull request. Guia completo em docs/COLABORACAO.md.
+<b>Arquivos no repositório</b><br/>entrega/ResolveTI-documentacao.pdf<br/>entrega/ResolveTI-demonstracao.mp4<br/>docs/VALIDACAO.md
 
-<b>Divisão:</b> Filipe acompanha a integração e deve compreender abertura, validações e fluxos. Para o colega, propõe-se validação independente, correções encontradas e revisão dos modelos. A divisão é proposta; contribuição, nome e autoria de commits devem refletir o trabalho efetivamente realizado.
+<b>Referências</b><br/>Enunciado do trabalho prático, consultado em 15/11/2026. <link href="https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9" color="#156d59"><u>https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9</u></link>
 
-<b>Entregáveis:</b> este PDF com link do repositório; entrega/ResolveTI-demonstracao.mp4 (até 1 minuto); repositório público. Prazo informado no enunciado: 18/11/2026 às 21h00. A versão foi preparada em 15/11/2026 para a antecipação solicitada.
-
-<b>Conferência antes de submeter:</b> identificar o segundo integrante se a entrega for em dupla; revisar o PDF; assistir ao MP4; testar o clone; conferir acesso ao repositório; enviar os arquivos no canal definido pelo professor. Preparar arquivos não significa submetê-los ao ambiente acadêmico.
-
-<b>Referências:</b> enunciado “Trabalho Prático - Documentação e Implementação Inicial de um Projeto de Software”, consultado no Notion pelo navegador em 15/11/2026; código e testes deste repositório. O enunciado define envio pela BB, PDF na ordem adotada, vídeo até 1 minuto, commits semânticos e participação de ambos em dupla.
-
-<link href="https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9" color="#156d59">Enunciado do professor no Notion</link>
+Implementação e testes do ResolveTI. <link href="https://github.com/Filipesilva10/resolveti" color="#156d59"><u>https://github.com/Filipesilva10/resolveti</u></link>
