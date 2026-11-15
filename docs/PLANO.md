@@ -2,8 +2,8 @@
 
 Cada etapa termina com um resumo do resultado e pedido de OK antes de avançar.
 
-1. Publicar a implementação inicial no GitHub e verificar os arquivos.
-2. Revisar e integrar detalhes, filtros, mensagens, atribuição e conclusão, usando a versão local completa como referência explícita. Fazer commits das mudanças reais de integração e correção, sem simular datas de desenvolvimento.
+1. Concluída em 14/11/2026: publicar a implementação inicial no GitHub e verificar os arquivos.
+2. Integração realizada em 15/11/2026: detalhes, filtros, mensagens, atribuição e conclusão, usando a versão local completa como referência explícita. Incluídas correções de busca por acentos/número, isolamento de rascunhos e validação de identificadores. Os commits representam esta integração e revisão reais.
 3. Conferir a interface e testar os fluxos de solicitante e técnico; registrar resultados e limitações.
 4. Consolidar RF, RNF, regras de negócio, descrições de casos de uso e diagrama de classes coerente com o código.
 5. Produzir e revisar o PDF na ordem exigida pelo professor, incluindo o endereço do repositório.

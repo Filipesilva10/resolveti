@@ -1,69 +1,174 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ResolveTI · Etapa inicial</title>
-<link rel="stylesheet" href="style.css">
-<script src="app.js" defer>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResolveTI · Central de suporte</title>
+  <link rel="stylesheet" href="style.css">
+<script src="app.js" type="module">
 </script>
 </head>
 <body>
-<div id="aviso" role="status" aria-live="polite" hidden>
+  <div id="aviso" role="status" aria-live="polite" hidden>
 </div>
-<main id="login" class="login-layout">
-<section class="apresentacao">
+  <main id="login" class="login-layout">
+    <section class="apresentacao">
+      <a class="marca" href="/">r<span>ResolveTI</span>
+</a>
+      <div>
+<span class="etiqueta">CENTRAL DE SUPORTE</span>
+<h1>Um problema.<br>Um chamado.<br>
+<em>Uma solução.</em>
+</h1>
+<p>Organize solicitações, acompanhe cada atendimento e mantenha sua equipe conectada.</p>
+</div>
+      <small>Projeto acadêmico · Análise e Projeto de Sistemas</small>
+    </section>
+    <section class="acesso">
+<div class="login-card">
+      <span class="etiqueta">BEM-VINDO DE VOLTA</span>
+<h2>Acesse sua conta</h2>
+<p>Seu próximo atendimento começa aqui.</p>
+      <form id="form-login">
+        <label>E-mail<input name="email" type="email" autocomplete="username" required placeholder="seu@email.com" maxlength="150">
+</label>
+        <label>Senha<input name="senha" type="password" autocomplete="current-password" required maxlength="128" placeholder="Sua senha">
+</label>
+        <button class="primario" type="submit">Entrar na central <span>→</span>
+</button>
+      </form>
+      <div class="demo">
+<strong>Explore a demonstração</strong>
+<p>Escolha um perfil para preencher os dados.</p>
+<div class="botoes">
+<button type="button" id="demo-solicitante">Solicitante</button>
+<button type="button" id="demo-tecnico">Técnico</button>
+</div>
+<small>Senha das contas de exemplo: Demo@123</small>
+</div>
+    </div>
+</section>
+  </main>
+  <div id="sistema" hidden>
+    <aside class="lateral">
 <a class="marca" href="/">r<span>ResolveTI</span>
 </a>
-<div>
-<span class="etiqueta">CENTRAL DE SUPORTE</span>
-<h1>Seu suporte,<br>
-<em>mais organizado.</em>
-</h1>
-<p>Abra sua solicitação e acompanhe o atendimento.</p>
+<span class="etiqueta">ESPAÇO DE TRABALHO</span>
+<button id="menu-chamados" class="menu ativo">▤ &nbsp; Chamados</button>
+<div class="lateral-fim">
+<span class="ponto">
+</span> Central de suporte<br>
+<small>Organização em cada atendimento.</small>
 </div>
-<small>Projeto acadêmico · Etapa inicial</small>
-</section>
-<section class="acesso">
-<div class="login-card">
-<span class="etiqueta">BEM-VINDO</span>
-<h2>Acesse sua conta</h2>
-<form id="form-login">
-<label>E-mail<input type="email" name="email" autocomplete="username" required value="solicitante@resolveti.local">
-</label>
-<label>Senha<input type="password" name="senha" autocomplete="current-password" required>
-</label>
-<button class="primario">Entrar →</button>
-</form>
-<div class="demo">
-<strong>Conta de demonstração</strong>
-<p>Senha: Demo@123</p>
-</div>
-</div>
-</section>
-</main>
-<div id="sistema" hidden>
-<header>
-<strong>ResolveTI</strong>
+</aside>
+    <div class="area-principal">
+      <header>
+<span>Central de suporte <span class="separador">/</span> Chamados</span>
 <div class="conta">
-<span id="usuario">
+<span id="nome-usuario">
 </span>
 <button id="sair">Sair</button>
 </div>
 </header>
-<main class="conteudo">
-<div class="titulo-pagina">
+      <main class="conteudo">
+        <section id="listagem">
+          <div class="titulo-pagina">
 <div>
-<span class="etiqueta">CENTRAL DE SUPORTE</span>
-<h1>Meus chamados</h1>
-<p>Registre um problema para a equipe de TI.</p>
+<span class="etiqueta">VISÃO GERAL</span>
+<h1 id="titulo-lista">Meus chamados</h1>
+<p id="subtitulo-lista">Acompanhe suas solicitações em um só lugar.</p>
 </div>
+<button id="novo" class="primario">+ Novo chamado</button>
+</div>
+          <div class="indicadores">
+<article>
+<span>Total de chamados</span>
+<strong id="total">0</strong>
+<small>Solicitações registradas</small>
+</article>
+<article>
+<span>
+<i class="ponto aberto">
+</i> Abertos</span>
+<strong id="abertos">0</strong>
+<small>Aguardando atendimento</small>
+</article>
+<article>
+<span>
+<i class="ponto andamento">
+</i> Em atendimento</span>
+<strong id="andamento">0</strong>
+<small>Uma solução a caminho</small>
+</article>
+<article>
+<span>
+<i class="ponto concluido">
+</i> Concluídos</span>
+<strong id="concluidos">0</strong>
+<small>Atendimentos finalizados</small>
+</article>
+</div>
+          <section class="painel">
+<div class="cabecalho-painel">
+<h2>Solicitações</h2>
 <button id="atualizar">↻ Atualizar</button>
 </div>
-<div class="detalhe-grid">
+<div class="filtros">
+<label class="busca">Buscar chamado<input id="busca" type="search" placeholder="Buscar por título ou número...">
+</label>
+<label>Situação<select id="filtro-status">
+<option value="">Todas as situações</option>
+<option>Aberto</option>
+<option>Em atendimento</option>
+<option>Concluído</option>
+</select>
+</label>
+<label>Prioridade<select id="filtro-prioridade">
+<option value="">Todas as prioridades</option>
+<option>Baixa</option>
+<option>Média</option>
+<option>Alta</option>
+</select>
+</label>
+</div>
+<div class="tabela-container">
+<table>
+<thead>
+<tr>
+<th>CHAMADO</th>
+<th>CATEGORIA</th>
+<th>PRIORIDADE</th>
+<th>SITUAÇÃO</th>
+<th>ABERTURA</th>
+<th>
+<span class="sr-only">Ações</span>
+</th>
+</tr>
+</thead>
+<tbody id="linhas">
+</tbody>
+</table>
+</div>
+<div id="vazio" class="vazio" hidden>
+<span>▤</span>
+<h3>Nenhum chamado por aqui</h3>
+<p>Abra uma solicitação ou ajuste os filtros para começar.</p>
+</div>
+<footer id="contagem">
+</footer>
+</section>
+        </section>
+        <section id="cadastro" hidden>
+<button class="voltar">← Voltar aos chamados</button>
+<div class="titulo-pagina">
+<div>
+<span class="etiqueta">NOVA SOLICITAÇÃO</span>
+<h1>Como podemos ajudar?</h1>
+<p>Conte o que aconteceu para facilitar o atendimento.</p>
+</div>
+</div>
 <form id="form-chamado" class="painel formulario">
-<h2>Abrir chamado</h2>
-<label>Título<input name="titulo" minlength="5" maxlength="100" required placeholder="Ex.: Falha na impressora">
+<label>Título<input name="titulo" required minlength="5" maxlength="100" placeholder="Ex.: Impressora não imprime os documentos">
 </label>
 <div class="duas-colunas">
 <label>Categoria<select name="categoria">
@@ -81,18 +186,71 @@
 </select>
 </label>
 </div>
-<label>Descrição<textarea name="descricao" rows="5" minlength="10" maxlength="2000" required>
+<label>Descrição<textarea name="descricao" required minlength="10" maxlength="2000" rows="6" placeholder="Descreva o problema, quando começou e o que você já tentou.">
 </textarea>
 </label>
-<button class="primario">Enviar chamado →</button>
-</form>
-<section class="painel bloco">
-<h2>Solicitações registradas</h2>
-<div id="lista">
+<p class="ajuda">Não informe senhas ou dados sensíveis no chamado.</p>
+<div class="acoes">
+<button type="button" class="voltar">Cancelar</button>
+<button class="primario" type="submit">Enviar chamado →</button>
 </div>
+</form>
+</section>
+        <section id="detalhes" hidden>
+<button class="voltar">← Voltar aos chamados</button>
+<div class="titulo-pagina">
+<div>
+<span class="etiqueta" id="numero-chamado">
+</span>
+<h1 id="detalhe-titulo">
+</h1>
+<p id="detalhe-meta">
+</p>
+</div>
+<span id="detalhe-status" class="badge">
+</span>
+</div>
+<div class="detalhe-grid">
+<div>
+<article class="painel bloco">
+<h2>Descrição do problema</h2>
+<p id="detalhe-descricao" class="texto-longo">
+</p>
+</article>
+<article id="bloco-solucao" class="painel bloco solucao" hidden>
+<h2>Solução registrada</h2>
+<p id="detalhe-solucao" class="texto-longo">
+</p>
+</article>
+<section class="painel bloco">
+<h2>Conversa do atendimento</h2>
+<div id="mensagens">
+</div>
+<form id="form-mensagem">
+<label>Nova mensagem<textarea name="conteudo" rows="3" required maxlength="1000" placeholder="Acrescente uma informação ao atendimento...">
+</textarea>
+</label>
+<button class="primario">Enviar mensagem</button>
+</form>
 </section>
 </div>
-</main>
+<aside class="painel bloco resumo">
+<h2>Informações</h2>
+<dl id="informacoes">
+</dl>
+<button id="iniciar" class="primario" hidden>Iniciar atendimento</button>
+<form id="form-solucao" hidden>
+<label>Solução<textarea name="solucao" required minlength="10" maxlength="2000" rows="5" placeholder="Explique como o problema foi resolvido.">
+</textarea>
+</label>
+<button class="primario">Concluir chamado ✓</button>
+</form>
+</aside>
 </div>
+</section>
+        <footer class="rodape">ResolveTI <span>·</span> Cada chamado, um passo para resolver.</footer>
+      </main>
+    </div>
+  </div>
 </body>
 </html>

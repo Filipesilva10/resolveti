@@ -2,7 +2,7 @@ import express from 'express';
 import { randomBytes } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { conferirSenha } from './banco.js';
-import { Usuario, Chamado } from './modelos.js';
+import { Usuario, Chamado, Mensagem } from './modelos.js';
 
 export function criarApp(banco) {
   const app = express();
@@ -68,6 +68,35 @@ export function criarApp(banco) {
     const resultado = banco.prepare(`INSERT INTO chamados(titulo,descricao,categoria,prioridade,solicitante_id,criado_em) VALUES (?,?,?,?,?,?)`)
       .run(c.titulo, c.descricao, c.categoria, c.prioridade, req.usuario.id, new Date().toISOString());
     res.status(201).json({ id: Number(resultado.lastInsertRowid) });
+  });
+  app.use('/api/chamados/:id', (req, res, next) => {
+    if (!/^\d+$/.test(req.params.id) || !Number.isSafeInteger(Number(req.params.id))) return res.status(404).json({ erro: 'Chamado não encontrado.' });
+    const dados = banco.prepare(consulta + ' WHERE c.id = ?').get(Number(req.params.id));
+    if (!dados || !req.usuario.podeConsultar(dados)) return res.status(404).json({ erro: 'Chamado não encontrado.' });
+    req.chamado = new Chamado(dados);
+    next();
+  });
+  app.get('/api/chamados/:id', (req, res) => {
+    const mensagens = banco.prepare(`SELECT m.*, u.nome AS autor FROM mensagens m JOIN usuarios u ON u.id = m.autor_id WHERE chamado_id = ? ORDER BY m.id`).all(req.chamado.id);
+    res.json({ ...req.chamado, mensagens });
+  });
+  app.post('/api/chamados/:id/iniciar', (req, res) => {
+    req.chamado.iniciar(req.usuario);
+    banco.prepare('UPDATE chamados SET status = ?, tecnico_id = ? WHERE id = ?').run(req.chamado.status, req.usuario.id, req.chamado.id);
+    res.json({ ok: true });
+  });
+  app.post('/api/chamados/:id/concluir', (req, res) => {
+    req.chamado.concluir(req.usuario, req.body?.solucao);
+    banco.prepare('UPDATE chamados SET status = ?, solucao = ?, concluido_em = ? WHERE id = ?')
+      .run(req.chamado.status, req.chamado.solucao, new Date().toISOString(), req.chamado.id);
+    res.json({ ok: true });
+  });
+  app.post('/api/chamados/:id/mensagens', (req, res) => {
+    if (req.chamado.status === 'Concluído') return res.status(400).json({ erro: 'Chamados concluídos não recebem novas mensagens.' });
+    const mensagem = new Mensagem(req.body?.conteudo);
+    banco.prepare('INSERT INTO mensagens(chamado_id,autor_id,conteudo,criado_em) VALUES (?,?,?,?)')
+      .run(req.chamado.id, req.usuario.id, mensagem.conteudo, new Date().toISOString());
+    res.status(201).json({ ok: true });
   });
   app.use('/api', (req, res) => res.status(404).json({ erro: 'Rota não encontrada.' }));
   app.use(express.static(fileURLToPath(new URL('../public', import.meta.url))));

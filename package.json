@@ -4,6 +4,6 @@
   "private": true,
   "type": "module",
   "engines": { "node": ">=24.14.0" },
-  "scripts": { "start": "node src/server.js", "test": "node --test test/abertura.test.js" },
+  "scripts": { "start": "node src/server.js", "test": "node --test test/abertura.test.js test/sistema.test.js test/filtros.test.js" },
   "dependencies": { "express": "5.2.1" }
 }
