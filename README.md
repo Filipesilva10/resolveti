@@ -1,4 +1,4 @@
-# ResolveTI — desenvolvimento por etapas
+# ResolveTI - central de chamados
 
 Sistema de chamados com login, abertura, consulta, filtros, mensagens, atendimento e conclusão. Criado com assistência de IA para revisão e aprendizado de Filipe e sua dupla. A integração da segunda etapa foi realizada em 15/11/2026.
 
@@ -6,8 +6,9 @@ Sistema de chamados com login, abertura, consulta, filtros, mensagens, atendimen
 Requer Node.js 24.14 ou superior.
 
 ```powershell
-cd projeto-etapas
-npm install
+git clone https://github.com/Filipesilva10/resolveti.git
+cd resolveti
+npm ci
 npm start
 ```
 
@@ -19,28 +20,41 @@ O banco é criado automaticamente em `dados/resolveti.sqlite`. Contas fictícias
 - Busca ignora acentos e maiúsculas; números podem ser digitados como `#001`.
 - Somente o técnico responsável pode concluir, com solução obrigatória. Chamados concluídos não recebem mensagens.
 - Rascunhos são limpos ao trocar de chamado ou encerrar a sessão.
-- Pendente: revisão visual completa no navegador, diagramas finais, PDF e vídeo.
+- Conferido no navegador: abertura, consulta, filtros, atendimento, mensagem e conclusão; formulário móvel em 390px e tela desktop em 1366px.
+- PDF com diagramas e vídeo MP4 disponíveis em `entrega/`.
+- Pendente para entrega em dupla: identificar o colega e incorporar sua contribuição real com commits próprios.
 - A versão completa em `../projeto-completo` é referência para estudo. Não copiar parcelas para criar um histórico fictício.
 
 ## Divisão proposta
-Filipe revisa e explica formulário, validações e abertura. O segundo integrante desenvolve/revisa atendimento e conclusão, com sua própria conta e commits. Nome e divisão final ainda precisam ser confirmados.
+Integrante identificado: **Filipe Silva Rodrigues**. O segundo integrante ainda não foi identificado. Filipe deve revisar e explicar o projeto. Ao colega propõe-se validação independente, correções encontradas e revisão dos modelos, com sua própria conta e commits. Veja [o guia de colaboração](docs/COLABORACAO.md). Atendimento e conclusão já foram integrados; não são tarefas novas a atribuir ao colega.
 
 ## Git
 Commits registram alterações reais. Revisar com `git status` e `git diff`, adicionar somente arquivos da tarefa e escrever mensagens semânticas. Não há tarefa automática por hora e não há alteração de datas ou autoria.
 
 Exemplo para uma próxima mudança real:
 ```powershell
-git switch -c feat/detalhes-chamado
-# Desenvolver, testar e revisar a funcionalidade.
-git add src/app.js public/app.js public/index.html
-git commit -m "feat: adiciona consulta dos detalhes do chamado"
-git switch main
-git merge feat/detalhes-chamado
+git switch -c test/validacao-colega
+# Executar os cenários e escrever as próprias evidências.
+git add docs/VALIDACAO-COLEGA.md
+git commit -m "test: registra validacao independente dos fluxos de chamados"
+git push -u origin test/validacao-colega
+# Abrir pull request no GitHub para revisão.
 ```
 
 Repositório: https://github.com/Filipesilva10/resolveti
 
-O segundo integrante ainda não foi identificado. PDF e vídeo ainda não produzidos. Consulte `docs/PLANO.md` para acompanhar as próximas etapas.
+## Arquivos de entrega
+
+- [Documentação em PDF](entrega/ResolveTI-documentacao.pdf)
+- [Demonstração em MP4](entrega/ResolveTI-demonstracao.mp4)
+- [Documentação editável](docs/DOCUMENTACAO.md)
+- [Guia para seu colega](docs/COLABORACAO.md)
+- [Validação e roteiro de testes](docs/VALIDACAO.md)
+- [Como explicar o código](docs/GUIA-CODIGO.md)
+
+O PDF segue a ordem do enunciado consultado em 15/11/2026. Para entregar em dupla, atualize a identificação do colega e registre sua contribuição antes de enviar na BB. O vídeo é único para a dupla. Prazo informado pelo professor: 18/11/2026, às 21h00.
+
+Para regenerar o PDF: `python -m pip install reportlab`, depois `python scripts/gerar_documentacao.py`. O script também gera Markdown e diagramas SVG. A aplicação não depende de Python.
 
 ## Verificação
 Execute `npm test`. Os testes cobrem abertura, autorização por perfil, atribuição, mensagens, conclusão, persistência e filtros. As rotas são exercitadas em memória, sem abrir portas; isso não substitui a revisão visual no navegador.

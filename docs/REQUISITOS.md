@@ -38,4 +38,4 @@ Inclui login, abertura, consulta, mensagens, início e conclusão. Exclui anexos
 | RN-06 | Encerramento | Somente o técnico responsável pode concluir um chamado Em atendimento, com solução de 10 a 2000 caracteres. |
 | RN-07 | Mensagens | Conteúdo entre 1 e 1000 caracteres, com autor e data; chamados concluídos não recebem novas mensagens. |
 
-Documento inicial para revisão. O PDF final deverá acrescentar capa, casos de uso detalhados, diagramas formais e URL real do repositório, na ordem exigida pelo professor.
+Este catálogo é complementado por DOCUMENTACAO.md e pelo PDF em entrega/ResolveTI-documentacao.pdf, com capa, casos de uso, diagramas e endereço do repositório na ordem do enunciado.

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="480" height="440" preserveAspectRatio="xMinYMin meet" viewBox="0 0 480 440" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="480" height="440"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-440)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="105" y="10" width="270" height="415" style="stroke: rgb(8%,42%,34%); stroke-linecap: butt; stroke-width: 1; fill: none; fill-rule: evenodd;"/>
+			<text x="210" y="410" style="font-family: Helvetica; font-size: 12px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,820) scale(1,-1)">ResolveTI</text>
+			<circle cx="45" cy="260" r="8" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: none; fill-rule: evenodd;"/>
+			<path d="M 45,252 L 45,222 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 29,240 L 61,240 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 45,222 L 30,204 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 45,222 L 60,204 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="21" y="188" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,376) scale(1,-1)">Solicitante</text>
+			<circle cx="435" cy="260" r="8" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1; fill: none; fill-rule: evenodd;"/>
+			<path d="M 435,252 L 435,222 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 419,240 L 451,240 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 435,222 L 420,204 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 435,222 L 450,204 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="411" y="188" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,376) scale(1,-1)">Técnico</text>
+			<ellipse cx="240.0" cy="375.0" rx="100.0" ry="17.0" style="stroke: rgb(54%,65%,60%); stroke-linecap: butt; stroke-width: 1; fill: rgb(95%,97%,96%); fill-rule: evenodd;"/>
+			<text x="218.0" y="372" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,744) scale(1,-1)">Autenticar</text>
+			<path d="M 62,225 L 140,375 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 418,225 L 340,375 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<ellipse cx="240.0" cy="327.0" rx="100.0" ry="17.0" style="stroke: rgb(54%,65%,60%); stroke-linecap: butt; stroke-width: 1; fill: rgb(95%,97%,96%); fill-rule: evenodd;"/>
+			<text x="211.4" y="324" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,648) scale(1,-1)">Abrir chamado</text>
+			<path d="M 62,225 L 140,327 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<ellipse cx="240.0" cy="279.0" rx="100.0" ry="17.0" style="stroke: rgb(54%,65%,60%); stroke-linecap: butt; stroke-width: 1; fill: rgb(95%,97%,96%); fill-rule: evenodd;"/>
+			<text x="198.2" y="276" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,552) scale(1,-1)">Consultar / filtrar</text>
+			<path d="M 62,225 L 140,279 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 418,225 L 340,279 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<ellipse cx="240.0" cy="231.0" rx="100.0" ry="17.0" style="stroke: rgb(54%,65%,60%); stroke-linecap: butt; stroke-width: 1; fill: rgb(95%,97%,96%); fill-rule: evenodd;"/>
+			<text x="200.4" y="228" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,456) scale(1,-1)">Registrar mensagem</text>
+			<path d="M 62,225 L 140,231 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 418,225 L 340,231 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<ellipse cx="240.0" cy="183.0" rx="100.0" ry="17.0" style="stroke: rgb(54%,65%,60%); stroke-linecap: butt; stroke-width: 1; fill: rgb(95%,97%,96%); fill-rule: evenodd;"/>
+			<text x="198.2" y="180" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,360) scale(1,-1)">Iniciar atendimento</text>
+			<path d="M 418,225 L 340,183 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<ellipse cx="240.0" cy="135.0" rx="100.0" ry="17.0" style="stroke: rgb(54%,65%,60%); stroke-linecap: butt; stroke-width: 1; fill: rgb(95%,97%,96%); fill-rule: evenodd;"/>
+			<text x="204.8" y="132" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,264) scale(1,-1)">Concluir chamado</text>
+			<path d="M 418,225 L 340,135 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<ellipse cx="240.0" cy="87.0" rx="100.0" ry="17.0" style="stroke: rgb(54%,65%,60%); stroke-linecap: butt; stroke-width: 1; fill: rgb(95%,97%,96%); fill-rule: evenodd;"/>
+			<text x="207.0" y="84" style="font-family: Helvetica; font-size: 9px;fill: rgb(14%,23%,20%); stroke:none;" transform="translate(0,168) scale(1,-1)">Encerrar sessão</text>
+			<path d="M 62,225 L 140,87 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 418,225 L 340,87 Z" style="stroke: rgb(45%,54%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+		</g>
+	</g>
+</svg>
