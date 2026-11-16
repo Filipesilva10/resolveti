@@ -24,7 +24,7 @@ async function api(caminho, metodo = 'GET', dados) {
   } catch {
     throw new Error('Não foi possível conectar ao servidor. Confira sua conexão e tente novamente.');
   }
-  if (resposta.status === 401) mostrarLogin();
+  if (resposta.status === 401 && caminho !== '/login') mostrarLogin();
   const resultado = await resposta.json().catch(() => null);
   if (!resposta.ok) {
     throw new Error(resultado?.erro || 'Não foi possível concluir a ação. Tente novamente.');
@@ -138,7 +138,11 @@ function formulario(id, acao) {
     executar(() => acao(Object.fromEntries(new FormData(form)), form), evento.submitter);
   });
 }
-formulario('#form-login', async dados => { await entrar(await api('/login', 'POST', dados)); $('#form-login').reset(); });
+formulario('#form-login', async dados => {
+  await entrar(await api('/login', 'POST', dados));
+  $('#form-login').reset();
+  $('#aviso').hidden = true;
+});
 formulario('#form-chamado', async (dados, form) => { const c = await api('/chamados', 'POST', dados); form.reset(); await abrirDetalhe(c.id); avisar('Chamado aberto com sucesso.'); });
 formulario('#form-mensagem', async (dados, form) => { await api(`/chamados/${chamadoAtual}/mensagens`, 'POST', dados); form.reset(); await abrirDetalhe(chamadoAtual); avisar('Mensagem enviada.'); });
 formulario('#form-solucao', async (dados, form) => { await api(`/chamados/${chamadoAtual}/concluir`, 'POST', dados); form.reset(); await abrirDetalhe(chamadoAtual); avisar('Chamado concluído.'); });
