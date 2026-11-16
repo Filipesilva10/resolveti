@@ -14,16 +14,22 @@ function avisar(mensagem, erro = false) {
   avisoTimer = setTimeout(() => { $('#aviso').hidden = true; }, 6000);
 }
 async function api(caminho, metodo = 'GET', dados) {
-  const resposta = await fetch('/api' + caminho, {
-    method: metodo,
-    headers: metodo === 'GET' ? {} : { 'Content-Type': 'application/json' },
-    body: metodo === 'GET' ? undefined : JSON.stringify(dados || {})
-  });
-  const resultado = await resposta.json();
-  if (!resposta.ok) {
-    if (resposta.status === 401) mostrarLogin();
-    throw new Error(resultado.erro || 'Não foi possível concluir a ação.');
+  let resposta;
+  try {
+    resposta = await fetch('/api' + caminho, {
+      method: metodo,
+      headers: metodo === 'GET' ? {} : { 'Content-Type': 'application/json' },
+      body: metodo === 'GET' ? undefined : JSON.stringify(dados || {})
+    });
+  } catch {
+    throw new Error('Não foi possível conectar ao servidor. Confira sua conexão e tente novamente.');
   }
+  if (resposta.status === 401) mostrarLogin();
+  const resultado = await resposta.json().catch(() => null);
+  if (!resposta.ok) {
+    throw new Error(resultado?.erro || 'Não foi possível concluir a ação. Tente novamente.');
+  }
+  if (resultado === null) throw new Error('O servidor retornou uma resposta inesperada. Tente novamente.');
   return resultado;
 }
 // textContent evita interpretar texto de chamados como código HTML.
