@@ -272,14 +272,31 @@ Figura. Chamado concluído visto pelo solicitante após o atendimento.
 ![Chamado concluído](imagens/chamado-concluido.png)
 
 
-## Apêndice D. Execução, Git e entrega
+## Apêndice D. Execução e entrega
 
 
-<b>Executar a partir do GitHub:</b><br/>git clone https://github.com/Filipesilva10/resolveti.git<br/>cd resolveti<br/>npm ci<br/>npm test<br/>npm start<br/>Abrir http://localhost:3001
+<b>Executar a cópia local</b><br/>Instale Git e Node.js 24.14 ou superior. No terminal, execute estes comandos, um por linha.
 
-Requer Node.js 24.14+ e Git para clonar. Contas: solicitante@resolveti.local, ana@resolveti.local e tecnico@resolveti.local. Senha: Demo@123. Os botões da tela de login preenchem os dois perfis principais. Ctrl+C encerra o servidor.
+<font name="Courier">git clone https://github.com/Filipesilva10/resolveti.git<br/>cd resolveti<br/>npm ci<br/>npm test<br/>npm start</font>
 
-<b>Arquivos no repositório</b><br/>entrega/ResolveTI-documentacao.pdf<br/>entrega/ResolveTI-demonstracao.mp4<br/>docs/VALIDACAO.md
+Acesse <link href="http://localhost:3001" color="#156d59"><u>http://localhost:3001</u></link> e use os botões Solicitante ou Técnico. A senha das contas fictícias é Demo@123. Use ana@resolveti.local com a mesma senha para verificar a separação dos chamados entre solicitantes. Ctrl+C encerra o servidor.
+
+<b>Demonstração pública</b><br/><link href="https://resolveti-unifran.onrender.com" color="#156d59"><u>https://resolveti-unifran.onrender.com</u></link><br/>A demonstração usa contas fictícias e dados temporários. Para conferir as mudanças da main e testar persistência, use a execução local.
+
+<b>O que enviar pela BB</b>
+
+| Item | Conteúdo |
+| --- | --- |
+
+| Documentação | Este PDF consolidado, com o endereço do repositório na capa. |
+
+| Demonstração | ResolveTI-demonstracao.mp4, com cerca de 36 segundos. |
+
+| Repositório | Link público do GitHub com o histórico de desenvolvimento. |
+
+<link href="https://github.com/Filipesilva10/resolveti/raw/refs/heads/main/entrega/ResolveTI-demonstracao.mp4" color="#156d59"><u>Baixar vídeo demonstrativo</u></link> · <link href="https://github.com/Filipesilva10/resolveti" color="#156d59"><u>Abrir repositório e histórico</u></link>
+
+<b>Verificações de interface na cópia local</b><br/>Em 16/11/2026, foram verificados no Chromium a correção do login sem redigitar o e-mail e o deslocamento do foco ao alternar entre lista, cadastro, detalhes e tela de login.
 
 <b>Referências</b><br/>Enunciado do trabalho prático, consultado em 15/11/2026. <link href="https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9" color="#156d59"><u>https://irradiated-worm-914.notion.site/3f9115cb767d800f873de9342b54bcd9</u></link>
 

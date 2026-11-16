@@ -34,32 +34,21 @@ Use Node.js 24.14 ou superior, comando de instalação `npm ci` e comando de in�
 ## Divisão proposta
 **Filipe Silva Rodrigues e Theo.** A contribuição proposta para Theo é validar os fluxos e implementar a ação **Limpar filtros**, usando a própria conta e seus commits. Veja [o plano com os arquivos e comandos](docs/PLANO-THEO.md).
 
-## Git
-Commits registram alterações reais. Revisar com `git status` e `git diff`, adicionar somente arquivos da tarefa e escrever mensagens semânticas. Não há tarefa automática por hora e não há alteração de datas ou autoria.
-
-Exemplo para uma próxima mudança real:
-```powershell
-git switch -c test/validacao-colega
-# Executar os cenários e escrever as próprias evidências.
-git add docs/VALIDACAO-COLEGA.md
-git commit -m "test: registra validacao independente dos fluxos de chamados"
-git push -u origin test/validacao-colega
-# Abrir pull request no GitHub para revisão.
-```
-
-Repositório: https://github.com/Filipesilva10/resolveti
-
 ## Arquivos de entrega
 
 - [Documentação em PDF](entrega/ResolveTI-documentacao.pdf)
 - [Demonstração em MP4](entrega/ResolveTI-demonstracao.mp4)
+- [Repositório público](https://github.com/Filipesilva10/resolveti)
+
+Esses são os três itens da entrega pela BB. O vídeo tem cerca de 36 segundos. Para entregar em dupla, complete o nome do Theo na capa e confira que os commits dele aparecem no histórico da `main`. Prazo informado no enunciado: 18/11/2026, às 21h00.
+
+## Materiais de apoio
+
 - [Documentação editável](docs/DOCUMENTACAO.md)
 - [Plano do Theo](docs/PLANO-THEO.md) e [modelo de validação](docs/modelos/VALIDACAO-THEO.md)
 - [Guia de colaboração](docs/COLABORACAO.md)
 - [Validação e roteiro de testes](docs/VALIDACAO.md)
 - [Como explicar o código](docs/GUIA-CODIGO.md)
-
-O PDF segue a ordem do enunciado consultado em 15/11/2026. Para entregar em dupla, atualize a identificação do colega e registre sua contribuição antes de enviar na BB. O vídeo é único para a dupla. Prazo informado pelo professor: 18/11/2026, às 21h00.
 
 Para regenerar o PDF, execute `python -m pip install reportlab`, depois `python scripts/gerar_documentacao.py`. Defina `RESOLVETI_INTEGRANTE_2` com o nome do colega para preencher a capa. Quando houver um endereço confirmado para a demonstração, defina `RESOLVETI_SITE_URL` com esse endereço para incluí-lo no PDF. O script também gera Markdown e diagramas SVG. A aplicação não depende de Python.
 

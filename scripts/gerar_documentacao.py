@@ -32,9 +32,9 @@ def page(title):
     if story: story.append(PageBreak())
     story.append(Paragraph(title,styles['HeadPT']))
     source.append('\n## '+title+'\n')
-def link(url):
+def link(url, rotulo=None):
     safe = escape(url, {'"': '&quot;'})
-    return f'<link href="{safe}" color="#156d59"><u>{safe}</u></link>'
+    return f'<link href="{safe}" color="#156d59"><u>{escape(rotulo or url)}</u></link>'
 def table(headers, rows, widths):
     cells=[[Paragraph(escape(str(x)),styles['SmallPT']) for x in row] for row in [headers]+rows]
     t=Table(cells,colWidths=widths,repeatRows=1,hAlign='LEFT')
@@ -187,10 +187,21 @@ if CAPTURA.exists():
     story.append(shot)
     p('Figura. Chamado concluído visto pelo solicitante após o atendimento.', True)
     source.append('![Chamado concluído](imagens/chamado-concluido.png)')
-page('Apêndice D. Execução, Git e entrega')
-p('<b>Executar a partir do GitHub:</b><br/>git clone https://github.com/Filipesilva10/resolveti.git<br/>cd resolveti<br/>npm ci<br/>npm test<br/>npm start<br/>Abrir http://localhost:3001')
-p('Requer Node.js 24.14+ e Git para clonar. Contas: solicitante@resolveti.local, ana@resolveti.local e tecnico@resolveti.local. Senha: Demo@123. Os botões da tela de login preenchem os dois perfis principais. Ctrl+C encerra o servidor.')
-p('<b>Arquivos no repositório</b><br/>entrega/ResolveTI-documentacao.pdf<br/>entrega/ResolveTI-demonstracao.mp4<br/>docs/VALIDACAO.md')
+page('Apêndice D. Execução e entrega')
+p('<b>Executar a cópia local</b><br/>Instale Git e Node.js 24.14 ou superior. No terminal, execute estes comandos, um por linha.')
+p('<font name="Courier">git clone https://github.com/Filipesilva10/resolveti.git<br/>cd resolveti<br/>npm ci<br/>npm test<br/>npm start</font>')
+p('Acesse ' + link('http://localhost:3001') + ' e use os botões Solicitante ou Técnico. A senha das contas fictícias é Demo@123. Use ana@resolveti.local com a mesma senha para verificar a separação dos chamados entre solicitantes. Ctrl+C encerra o servidor.')
+if SITE:
+    p('<b>Demonstração pública</b><br/>' + link(SITE) + '<br/>A demonstração usa contas fictícias e dados temporários. Para conferir as mudanças da main e testar persistência, use a execução local.')
+video = REPO + '/raw/refs/heads/main/entrega/ResolveTI-demonstracao.mp4'
+p('<b>O que enviar pela BB</b>')
+table(['Item','Conteúdo'],[
+    ['Documentação','Este PDF consolidado, com o endereço do repositório na capa.'],
+    ['Demonstração','ResolveTI-demonstracao.mp4, com cerca de 36 segundos.'],
+    ['Repositório','Link público do GitHub com o histórico de desenvolvimento.'],
+],[110,370])
+p(link(video, 'Baixar vídeo demonstrativo') + ' · ' + link(REPO, 'Abrir repositório e histórico'))
+p('<b>Verificações de interface na cópia local</b><br/>Em 16/11/2026, foram verificados no Chromium a correção do login sem redigitar o e-mail e o deslocamento do foco ao alternar entre lista, cadastro, detalhes e tela de login.')
 p('<b>Referências</b><br/>Enunciado do trabalho prático, consultado em 15/11/2026. ' + link(ENUNCIADO), True)
 p('Implementação e testes do ResolveTI. ' + link(REPO), True)
 
