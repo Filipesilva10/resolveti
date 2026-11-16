@@ -98,6 +98,7 @@ function renderizarLista() {
 }
 async function abrirDetalhe(id) {
   const c = await api('/chamados/' + id);
+  const mesmoDetalheVisivel = chamadoAtual === c.id && !$('#detalhes').hidden;
   if (chamadoAtual !== c.id) {
     $('#form-mensagem').reset();
     $('#form-solucao').reset();
@@ -123,7 +124,7 @@ async function abrirDetalhe(id) {
     item.append(elemento('strong', m.autor), elemento('small', data(m.criado_em)), elemento('p', m.conteudo, 'texto-longo'));
     $('#mensagens').append(item);
   }
-  tela('detalhes');
+  if (!mesmoDetalheVisivel) tela('detalhes');
 }
 async function executar(acao, botao) {
   if (botao) botao.disabled = true;
