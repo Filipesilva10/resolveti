@@ -41,11 +41,19 @@ function elemento(tag, conteudo, classe) {
 }
 function classeStatus(status) { return { 'Aberto': 'aberto', 'Em atendimento': 'andamento', 'Concluído': 'concluido' }[status]; }
 function data(valor) { return new Date(valor).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }); }
-function tela(nome) {
+function tela(nome, focar = false) {
+  const destino = $('#' + nome);
+  const mudouDeTela = destino.hidden;
   for (const id of ['listagem', 'cadastro', 'detalhes']) $('#' + id).hidden = id !== nome;
   window.scrollTo(0, 0);
+  if (mudouDeTela || focar) {
+    const titulo = destino.querySelector('h1');
+    titulo.tabIndex = -1;
+    titulo.focus({ preventScroll: true });
+  }
 }
 function mostrarLogin() {
+  const voltandoAoLogin = $('#login').hidden;
   $('#login').hidden = false;
   $('#sistema').hidden = true;
   usuario = null;
@@ -53,6 +61,7 @@ function mostrarLogin() {
   chamadoAtual = null;
   for (const form of document.querySelectorAll('form')) form.reset();
   for (const seletor of ['#busca', '#filtro-status', '#filtro-prioridade']) $(seletor).value = '';
+  if (voltandoAoLogin) $('#form-login [name=email]').focus();
 }
 async function entrar(dados) {
   usuario = dados;
@@ -62,16 +71,16 @@ async function entrar(dados) {
   $('#titulo-lista').textContent = usuario.perfil === 'tecnico' ? 'Central de chamados' : 'Meus chamados';
   $('#subtitulo-lista').textContent = usuario.perfil === 'tecnico' ? 'Organize a fila e acompanhe cada atendimento.' : 'Acompanhe suas solicitações em um só lugar.';
   $('#novo').hidden = usuario.perfil === 'tecnico';
-  await carregar();
+  await carregar(true);
 }
-async function carregar() {
+async function carregar(focar = false) {
   chamados = await api('/chamados');
   $('#total').textContent = chamados.length;
   $('#abertos').textContent = chamados.filter(c => c.status === 'Aberto').length;
   $('#andamento').textContent = chamados.filter(c => c.status === 'Em atendimento').length;
   $('#concluidos').textContent = chamados.filter(c => c.status === 'Concluído').length;
   renderizarLista();
-  tela('listagem');
+  tela('listagem', focar);
 }
 function renderizarLista() {
   const lista = filtrarChamados(chamados, $('#busca').value, $('#filtro-status').value, $('#filtro-prioridade').value);
