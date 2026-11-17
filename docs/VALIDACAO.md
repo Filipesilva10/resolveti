@@ -6,6 +6,12 @@ Data: 15/11/2026. Ambiente: Windows, Node.js 24.14, Chromium, SQLite local. Exec
 
 `npm test`: 19 testes aprovados após a preparação do modo de demonstração. Testes exercitam rotas Express em memória, validações, perfis, atribuição, mensagens, conclusão, persistência e filtros.
 
+### Verificações no GitHub
+
+A [aba Actions](https://github.com/Filipesilva10/resolveti/actions) mostra o workflow **Validação do ResolveTI**. Ele instala as dependências com `npm ci`, confere a sintaxe do JavaScript da interface e executa `npm test` com Node.js 24.14.0 em atualizações da `main` e pull requests destinados à `main`.
+
+Para revisar a contribuição do Theo, abra o pull request e confira o resultado em **Checks**. Se a execução falhar, abra o passo com erro e compare com `npm ci` e `npm test` na cópia local. Os testes automatizados não substituem os cenários executados no navegador e registrados no relatório.
+
 ## Revisão no navegador
 
 | Cenário | Resultado observado |
@@ -20,6 +26,15 @@ Data: 15/11/2026. Ambiente: Windows, Node.js 24.14, Chromium, SQLite local. Exec
 | Gravação da demonstração | O fluxo foi executado com cliques e digitação reais no Chromium. O cursor e as legendas foram adicionados à captura para acompanhar as ações. |
 | Demonstração pública | Em sessão nova no [site publicado](https://resolveti-unifran.onrender.com), foram conferidos login, abertura, filtro, atendimento, mensagem, conclusão, consulta da solução pelo solicitante e encerramento de sessão. |
 | Listagem em viewport móvel de 390px | Identificado transbordamento de elemento acessível no cabeçalho da tabela; corrigido com posicionamento relativo no th. |
+
+## Correções recentes na interface
+
+| Verificação | Resultado observado na cópia local |
+| --- | --- |
+| Conexão interrompida e página de erro do servidor | A interface exibiu uma mensagem em português e permitiu tentar novamente. |
+| Envio de mensagem em tela estreita | A conversa manteve a posição da página após a atualização. |
+| Senha incorreta e nova tentativa | O e-mail permaneceu preenchido e o aviso sumiu após o login válido. |
+| Navegação por teclado | O foco acompanhou a lista, o cadastro, os detalhes e o retorno ao login. |
 
 ## Roteiro para a validação independente da dupla
 
