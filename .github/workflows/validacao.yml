@@ -1,0 +1,36 @@
+name: Validação do ResolveTI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    name: Testes em Node.js 24
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.14.0'
+          package-manager-cache: false
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Conferir sintaxe do JavaScript da interface
+        run: node --check public/app.js
+
+      - name: Executar testes
+        run: npm test
