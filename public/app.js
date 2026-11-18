@@ -160,6 +160,11 @@ $('#sair').onclick = () => executar(async () => { await api('/sair', 'POST'); mo
 $('#novo').onclick = () => tela('cadastro');
 for (const botao of document.querySelectorAll('.voltar, #menu-chamados, #atualizar')) botao.onclick = () => executar(carregar);
 for (const id of ['#busca', '#filtro-status', '#filtro-prioridade']) $(id).addEventListener('input', renderizarLista);
+$('#limpar-filtros').onclick = () => {
+  for (const seletor of ['#busca', '#filtro-status', '#filtro-prioridade']) $(seletor).value = '';
+  renderizarLista();
+  $('#busca').focus();
+};
 for (const perfil of ['solicitante', 'tecnico']) $('#demo-' + perfil).onclick = () => { $('#form-login [name=email]').value = perfil + '@resolveti.local'; $('#form-login [name=senha]').value = 'Demo@123'; };
 // Restaura uma sessão existente sem exigir novo login ao atualizar a página.
 api('/eu').then(entrar).catch(() => mostrarLogin());
